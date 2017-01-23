@@ -78,6 +78,13 @@ int main() {
 	for (int num : sudoku3_4_4) cout << num << " ";
 	cout << endl;
 	
+
+	unordered_map<int, vector<int>> test_dict = unordered_map<int, vector<int>>();
+
+	Stack<unordered_map<int, vector<int>>> test_Stack;
+
+	test_Stack.push(test_dict);
+	test_Stack.pop();
 	/*
 	unordered_map<char, vector<int>> test;
 	test['a'] = {1,2,3};

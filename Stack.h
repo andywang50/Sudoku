@@ -43,7 +43,8 @@ void Stack<T>::push(const T& newData) {
 
 template <typename T>
 T Stack<T>::pop() {
-	T item = NULL;
+	
+	T item = T();
 	if (!first == 0) {
 		Node<T>* pos = first;
 		item = pos->data;
