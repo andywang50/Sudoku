@@ -2,7 +2,7 @@
 #define STACK
 
 #include "Node.h"
-
+#include <cstddef>
 template <typename T>
 class Stack {
 public:
@@ -10,6 +10,8 @@ public:
 
 	void push(const T& newData);
 	T pop();
+
+	T get_last_without_pop() const;
 
 	~Stack();
 	Stack(const Stack<T>& b);
@@ -43,15 +45,26 @@ void Stack<T>::push(const T& newData) {
 
 template <typename T>
 T Stack<T>::pop() {
-	
+
 	T item = T();
 	if (!first == 0) {
 		Node<T>* pos = first;
 		item = pos->data;
 		first = pos->next;
 		delete pos;
+		length = length - 1;
+
 	}
-	length = length - 1;
+	return item;
+}
+
+template <typename T>
+T Stack<T>::get_last_without_pop() const {
+	T item = T();
+
+	if (!first == 0) {
+		item = first->data;
+	}
 	return item;
 }
 
@@ -102,4 +115,7 @@ template <typename T>
 int Stack<T>::get_length() {
 	return this->length;
 }
+
+
 #endif
+

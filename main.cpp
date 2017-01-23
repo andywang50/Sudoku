@@ -1,13 +1,14 @@
-#include <iostream>
-#include <vector>
+
 #include "Stack.h"
 #include "Matrix.h"
+#include <iostream>
+#include <vector>
 #include <unordered_map>
-#include <map>
+#include <fstream>
 using namespace std;
 
 int main() {
-	/*
+	
 	Stack<int> test = Stack<int>();
 	test.push(1);
 	test.push(2);
@@ -34,7 +35,7 @@ int main() {
 	}
 
 	Stack<int> test3 = Stack<int>(test2);
-	*/
+	
 	
 	Matrix sudoku = Matrix(9);
 	cout << "0" << endl;
@@ -70,13 +71,17 @@ int main() {
 	cout << endl;
 
 	for (int num : sudoku1_4_4) cout << num << " ";
-	cout << endl;
+	cout << endl; 
 
 	for (int num : sudoku2_4_4) cout << num << " ";
 	cout << endl;
 
 	for (int num : sudoku3_4_4) cout << num << " ";
 	cout << endl;
+
+	cout << solve(sudoku) << endl;
+
+	
 	
 
 	unordered_map<int, vector<int>> test_dict = unordered_map<int, vector<int>>();
@@ -95,12 +100,12 @@ int main() {
 		v->erase(it);
 	cout << "A" << endl;
 	*/
-	/*
-	Matrix sudoku = Matrix(9);
+	
+	Matrix sudoku0 = Matrix(9);
 	Entry test_entry = Entry(4, 4);
-	vector<Entry> row_list = sudoku.get_row(test_entry);
-	vector<Entry> col_list = sudoku.get_col(test_entry);
-	vector<Entry> square_list = sudoku.get_square(test_entry);
+	vector<Entry> row_list = sudoku0.get_row(test_entry);
+	vector<Entry> col_list = sudoku0.get_col(test_entry);
+	vector<Entry> square_list = sudoku0.get_square(test_entry);
 
 	cout << "Testing row" << endl;
 	for (Entry e : row_list) cout << e;
@@ -129,7 +134,15 @@ int main() {
 
 	test_entry3 = Entry(5, 5);
 	cout << (test_entry3 != test_entry) << endl;
-	*/
+	
+
+	Matrix sudoku_file = Matrix("sudoku.txt");
+	cout << sudoku_file << endl;
+	sudoku_file.remove_feasible_value_from_entry(testEntry1, 4);
+	std::vector<int> sudoku_file_4_4 = sudoku_file.get_feasbile_values(testEntry1);
+
+	for (int num : sudoku_file_4_4) cout << num << " ";
+	cout << endl;
 
 	return 0;
 }

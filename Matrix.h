@@ -4,15 +4,9 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
-
-
-template <typename Container>
-struct container_hash {
-	std::size_t operator()(Container const& c) const {
-		return boost::hash_range(c.begin(), c.end());
-
-	}
-};
+#include "Stack.h"
+#include "Dictionary.h"
+#include <fstream>
 class Matrix;
 class Entry {
 public:
@@ -53,6 +47,9 @@ private:
 
 class Matrix {
 public:
+
+	friend int solve(Matrix m);
+
 	friend std::ostream& operator << (std::ostream& os, const Matrix& m);
 	Matrix();
 	Matrix(int N);
@@ -61,6 +58,8 @@ public:
 	Matrix& operator = (const Matrix& b);
 
 	~Matrix();
+
+	Matrix(std::string filename);
 
 	int& operator ()(int row, int column){	return sudoku[row][column];	}
 	int operator ()(int row, int column) const {return sudoku[row][column];}
@@ -76,57 +75,19 @@ public:
 
 	std::vector<Entry> get_square(Entry coord)const;
 
-	std::vector<int> default_feasible_values() {
-		std::vector<int> fv;
-		for (int i = 1; i <= size; i++) fv.push_back(i);
-		return fv;
-	}
+	std::vector<int> default_feasible_values();
 
-	std::vector<int> get_feasbile_values(Entry e) const {
-		int row = e.row_coord;
-		int col = e.col_coord;
-		int key = row*size + col;
-		std::unordered_map<int, std::vector<int>>::const_iterator got = feasible_values_dict.find(key);
-		std::vector<int> v;
-		if (got == feasible_values_dict.end())
-			std::cout << "Entry(" << row << "," << col << ") " << "not found\n";
-		else
-			v = got->second;
+	std::vector<int> get_feasbile_values(Entry e) const;
 
-		return v;
-	}
+	void remove_feasible_value_from_entry(Entry e, int num);
 
-	void remove_feasible_value_from_entry(Entry e, int num) {
-		int row = e.row_coord;
-		int col = e.col_coord;
-		int key = row*size + col;
-		std::vector<int>* v_ptr = &(feasible_values_dict[key]);
-
- 		auto it = std::find(v_ptr->begin(), v_ptr->end(), num);
-		if (it != v_ptr->end()) {
-			v_ptr->erase(it);
-		}
-	}
-
-	void init() {
-	
-		for (int row = 0; row < size; row++) {
-			for (int col = 0; col < size; col++) {
-				int key = row*size + col;
-				std::vector<int> fv= default_feasible_values();
-				feasible_values_dict[key] = fv;
-				
-			}
-		}
-		
-	}
-
+	void init();
 private:
 	int** sudoku;
 	int size = 0;
-
-	
-	std::unordered_map<int, std::vector<int>> feasible_values_dict;
+	int level = 0;
+	Stack<Dictionary> feasible_values_dict_stack;
+	//std::unordered_map<int, std::vector<int>> feasible_values_dict;
 
 };
 #endif
