@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include "Stack.h"
 #include "Dictionary.h"
+#include <fstream>
 class Matrix;
 class Entry {
 public:
@@ -58,6 +59,8 @@ public:
 
 	~Matrix();
 
+	Matrix(std::string filename);
+
 	int& operator ()(int row, int column){	return sudoku[row][column];	}
 	int operator ()(int row, int column) const {return sudoku[row][column];}
 
@@ -72,44 +75,13 @@ public:
 
 	std::vector<Entry> get_square(Entry coord)const;
 
-	std::vector<int> default_feasible_values() {
-		std::vector<int> fv;
-		for (int i = 1; i <= size; i++) fv.push_back(i);
-		return fv;
-	}
+	std::vector<int> default_feasible_values();
 
-	std::vector<int> get_feasbile_values(Entry e) const {
-		Dictionary feasible_values_dict = feasible_values_dict_stack.get_last_without_pop();
-		int row = e.row_coord;
-		int col = e.col_coord;
-		int key = row*size + col;
-		return feasible_values_dict.get(key);
-	}
+	std::vector<int> get_feasbile_values(Entry e) const;
 
-	void remove_feasible_value_from_entry(Entry e, int num) {
-		int row = e.row_coord;
-		int col = e.col_coord;
-		int key = row*size + col;
-		Dictionary feasible_values_dict = feasible_values_dict_stack.pop();
-		feasible_values_dict.remove_feasible_value_from_entry(key, num);
-		feasible_values_dict_stack.push(feasible_values_dict);
-		return;
-	}
+	void remove_feasible_value_from_entry(Entry e, int num);
 
-	void init() {
-		Dictionary feasible_values_dict = Dictionary();
-		for (int row = 0; row < size; row++) {
-			for (int col = 0; col < size; col++) {
-				int key = row*size + col;
-				std::vector<int> fv= default_feasible_values();
-				feasible_values_dict.add(key, fv);
-				
-			}
-		}
-		level++;
-		feasible_values_dict_stack.push(feasible_values_dict);
-	}
-
+	void init();
 private:
 	int** sudoku;
 	int size = 0;
