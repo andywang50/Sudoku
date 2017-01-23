@@ -1,7 +1,8 @@
-#include <iostream>
-#include <vector>
+
 #include "Stack.h"
 #include "Matrix.h"
+#include <iostream>
+#include <vector>
 #include <unordered_map>
 #include <map>
 using namespace std;
@@ -77,6 +78,8 @@ int main() {
 
 	for (int num : sudoku3_4_4) cout << num << " ";
 	cout << endl;
+
+	cout << solve(sudoku) << endl;
 	
 	/*
 	unordered_map<char, vector<int>> test;

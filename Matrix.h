@@ -4,15 +4,10 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include "Stack.h"
 
 
-template <typename Container>
-struct container_hash {
-	std::size_t operator()(Container const& c) const {
-		return boost::hash_range(c.begin(), c.end());
 
-	}
-};
 class Matrix;
 class Entry {
 public:
@@ -53,6 +48,9 @@ private:
 
 class Matrix {
 public:
+
+	friend int solve(Matrix m);
+
 	friend std::ostream& operator << (std::ostream& os, const Matrix& m);
 	Matrix();
 	Matrix(int N);
@@ -86,6 +84,7 @@ public:
 		int row = e.row_coord;
 		int col = e.col_coord;
 		int key = row*size + col;
+		std::unordered_map<int, std::vector<int>> feasible_values_dict = feasible_values_dict_stack.get_last_without_pop();
 		std::unordered_map<int, std::vector<int>>::const_iterator got = feasible_values_dict.find(key);
 		std::vector<int> v;
 		if (got == feasible_values_dict.end())
@@ -100,6 +99,7 @@ public:
 		int row = e.row_coord;
 		int col = e.col_coord;
 		int key = row*size + col;
+		std::unordered_map<int, std::vector<int>> feasible_values_dict = feasible_values_dict_stack.get_last_without_pop();
 		std::vector<int>* v_ptr = &(feasible_values_dict[key]);
 
  		auto it = std::find(v_ptr->begin(), v_ptr->end(), num);
@@ -109,7 +109,7 @@ public:
 	}
 
 	void init() {
-	
+		std::unordered_map<int, std::vector<int>> feasible_values_dict = std::unordered_map<int, std::vector<int>>();
 		for (int row = 0; row < size; row++) {
 			for (int col = 0; col < size; col++) {
 				int key = row*size + col;
@@ -118,15 +118,16 @@ public:
 				
 			}
 		}
-		
+		level++;
+		feasible_values_dict_stack.push(feasible_values_dict);
 	}
 
 private:
 	int** sudoku;
 	int size = 0;
-
-	
-	std::unordered_map<int, std::vector<int>> feasible_values_dict;
+	int level = 0;
+	Stack<std::unordered_map<int, std::vector<int>>> feasible_values_dict_stack;
+	//std::unordered_map<int, std::vector<int>> feasible_values_dict;
 
 };
 #endif

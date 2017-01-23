@@ -1,5 +1,6 @@
 #include "Matrix.h"
 
+
 std::ostream & operator<<(std::ostream & os, const Entry & e)
 {
 	os << e.toString();
@@ -30,6 +31,8 @@ std::ostream& operator << (std::ostream& os, const Matrix& m) {
 }
 
 Matrix::Matrix() {
+	size = 0;
+	level = 0;
 	init();
 }
 
@@ -50,7 +53,7 @@ Matrix::Matrix(int N) {
 
 Matrix::Matrix(const Matrix& b) {
 	size = b.size;
-	this->feasible_values_dict = b.feasible_values_dict;
+	this->feasible_values_dict_stack = b.feasible_values_dict_stack;
 	sudoku = new int*[size];
 	for (int i = 0; i < size; i++) {
 		sudoku[i] = new int[size];
@@ -64,7 +67,7 @@ Matrix::Matrix(const Matrix& b) {
 Matrix& Matrix::operator = (const Matrix& b) {
 	if (this != &b) {
 		size = b.size;
-		feasible_values_dict = b.feasible_values_dict;
+		feasible_values_dict_stack = b.feasible_values_dict_stack;
 		sudoku = new int*[size];
 		for (int i = 0; i < size; i++) {
 			sudoku[i] = new int[size];

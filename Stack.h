@@ -11,6 +11,8 @@ public:
 	void push(const T& newData);
 	T pop();
 
+	T get_last_without_pop() const;
+
 	~Stack();
 	Stack(const Stack<T>& b);
 	Stack<T>& operator = (const Stack<T>& b);
@@ -49,8 +51,9 @@ T Stack<T>::pop() {
 		item = pos->data;
 		first = pos->next;
 		delete pos;
+		length = length - 1;
+
 	}
-	length = length - 1;
 	return item;
 }
 
@@ -101,4 +104,15 @@ template <typename T>
 int Stack<T>::get_length() {
 	return this->length;
 }
+
+template <typename T>
+T Stack<T>::get_last_without_pop() const {
+	T item = NULL;
+	if (!first == 0) {
+		Node<T>* pos = first;
+		item = pos->data;
+	}
+	return item;
+}
 #endif
+
