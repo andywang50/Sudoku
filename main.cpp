@@ -4,11 +4,10 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
-#include <map>
 using namespace std;
 
 int main() {
-	/*
+	
 	Stack<int> test = Stack<int>();
 	test.push(1);
 	test.push(2);
@@ -35,8 +34,8 @@ int main() {
 	}
 
 	Stack<int> test3 = Stack<int>(test2);
-	*/
 	
+	/*
 	Matrix sudoku = Matrix(9);
 	cout << "0" << endl;
 	cout << sudoku << endl << endl;
@@ -80,7 +79,7 @@ int main() {
 	cout << endl;
 
 	cout << solve(sudoku) << endl;
-	
+	*/
 	/*
 	unordered_map<char, vector<int>> test;
 	test['a'] = {1,2,3};

@@ -5,9 +5,7 @@
 #include <vector>
 #include <unordered_map>
 #include "Stack.h"
-
-
-
+#include "Dictionary.h"
 class Matrix;
 class Entry {
 public:
@@ -81,40 +79,30 @@ public:
 	}
 
 	std::vector<int> get_feasbile_values(Entry e) const {
+		Dictionary feasible_values_dict = feasible_values_dict_stack.get_last_without_pop();
 		int row = e.row_coord;
 		int col = e.col_coord;
 		int key = row*size + col;
-		std::unordered_map<int, std::vector<int>> feasible_values_dict = feasible_values_dict_stack.get_last_without_pop();
-		std::unordered_map<int, std::vector<int>>::const_iterator got = feasible_values_dict.find(key);
-		std::vector<int> v;
-		if (got == feasible_values_dict.end())
-			std::cout << "Entry(" << row << "," << col << ") " << "not found\n";
-		else
-			v = got->second;
-
-		return v;
+		return feasible_values_dict.get(key);
 	}
 
 	void remove_feasible_value_from_entry(Entry e, int num) {
 		int row = e.row_coord;
 		int col = e.col_coord;
 		int key = row*size + col;
-		std::unordered_map<int, std::vector<int>> feasible_values_dict = feasible_values_dict_stack.get_last_without_pop();
-		std::vector<int>* v_ptr = &(feasible_values_dict[key]);
-
- 		auto it = std::find(v_ptr->begin(), v_ptr->end(), num);
-		if (it != v_ptr->end()) {
-			v_ptr->erase(it);
-		}
+		Dictionary feasible_values_dict = feasible_values_dict_stack.pop();
+		feasible_values_dict.remove_feasible_value_from_entry(key, num);
+		feasible_values_dict_stack.push(feasible_values_dict);
+		return;
 	}
 
 	void init() {
-		std::unordered_map<int, std::vector<int>> feasible_values_dict = std::unordered_map<int, std::vector<int>>();
+		Dictionary feasible_values_dict = Dictionary();
 		for (int row = 0; row < size; row++) {
 			for (int col = 0; col < size; col++) {
 				int key = row*size + col;
 				std::vector<int> fv= default_feasible_values();
-				feasible_values_dict[key] = fv;
+				feasible_values_dict.add(key, fv);
 				
 			}
 		}
@@ -126,7 +114,7 @@ private:
 	int** sudoku;
 	int size = 0;
 	int level = 0;
-	Stack<std::unordered_map<int, std::vector<int>>> feasible_values_dict_stack;
+	Stack<Dictionary> feasible_values_dict_stack;
 	//std::unordered_map<int, std::vector<int>> feasible_values_dict;
 
 };

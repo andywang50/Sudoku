@@ -2,7 +2,7 @@
 #define STACK
 
 #include "Node.h"
-
+#include <cstddef>
 template <typename T>
 class Stack {
 public:
@@ -58,6 +58,16 @@ T Stack<T>::pop() {
 }
 
 template <typename T>
+T Stack<T>::get_last_without_pop() const {
+	T item = NULL;
+
+	if (!first == 0) {
+		item = first->data;
+	}
+	return item;
+}
+
+template <typename T>
 void Stack<T>::deep_copy(const Stack<T>& b) {
 	first = 0;
 	length = 0;
@@ -105,14 +115,6 @@ int Stack<T>::get_length() {
 	return this->length;
 }
 
-template <typename T>
-T Stack<T>::get_last_without_pop() const {
-	T item = NULL;
-	if (!first == 0) {
-		Node<T>* pos = first;
-		item = pos->data;
-	}
-	return item;
-}
+
 #endif
 
