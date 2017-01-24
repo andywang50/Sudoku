@@ -168,7 +168,7 @@ std::vector<Entry> Matrix::get_square(Entry coord) const
 	return square_list;
 }
 
-std::vector<int> Matrix::default_feasible_values() {
+std::vector<int> Matrix::default_feasible_values() const {
 	std::vector<int> fv;
 	for (int i = 1; i <= size; i++) fv.push_back(i);
 	return fv;
@@ -190,6 +190,17 @@ void Matrix::remove_feasible_value_from_entry(Entry e, int num)
 	int key = row*size + col;
 	Dictionary feasible_values_dict = feasible_values_dict_stack.pop();
 	feasible_values_dict.remove_feasible_value_from_entry(key, num);
+	feasible_values_dict_stack.push(feasible_values_dict);
+	return;
+}
+
+void Matrix::remove_all_feasible_values_from_entry(Entry e)
+{
+	int row = e.row_coord;
+	int col = e.col_coord;
+	int key = row*size + col;
+	Dictionary feasible_values_dict = feasible_values_dict_stack.pop();
+	feasible_values_dict.remove_all_feasible_values_from_entry(key);
 	feasible_values_dict_stack.push(feasible_values_dict);
 	return;
 }

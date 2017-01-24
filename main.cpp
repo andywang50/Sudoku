@@ -5,10 +5,14 @@
 #include <vector>
 #include <unordered_map>
 #include <fstream>
+#include <ctime>        // std::time
+#include <cstdlib> 
+
 using namespace std;
 
 int main() {
-	
+	srand(unsigned(std::time(0)));
+
 	Stack<int> test = Stack<int>();
 	test.push(1);
 	test.push(2);
@@ -79,7 +83,6 @@ int main() {
 	for (int num : sudoku3_4_4) cout << num << " ";
 	cout << endl;
 
-	cout << solve(sudoku) << endl;
 
 	
 	
@@ -144,5 +147,13 @@ int main() {
 	for (int num : sudoku_file_4_4) cout << num << " ";
 	cout << endl;
 
+
+	Entry failure_sign = Entry(Entry::DEFAULT_INIT_COORD, Entry::DEFAULT_INIT_COORD);
+	cout << "failure equals failure: " << (failure_sign == sudoku.Sign_of_Failure )<< endl;
+	Entry success_Sign = Entry(Entry::SIGN_OF_SUCCESS, Entry::SIGN_OF_SUCCESS);
+	cout << "success equals success: " << (success_Sign == sudoku.Sign_of_Success )<< endl;
+
+	cout << sudoku_file.solve() << endl;
+	cout << sudoku_file << endl;
 	return 0;
 }

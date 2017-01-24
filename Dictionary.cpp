@@ -24,6 +24,24 @@ std::vector<int> Dictionary::get(int key) const
 	return v;
 }
 
+int Dictionary::get_num_guesses(int key) const
+{
+
+	return get(key).size();
+}
+
+void Dictionary::remove_all_feasible_values_from_entry(int key) {
+	std::vector<int>* v_ptr = &(feasible_values_dict[key]);
+	std::vector<int> v = get(key);
+	for (int num : v) {
+		auto it = std::find(v_ptr->begin(), v_ptr->end(), num);
+		if (it != v_ptr->end()) {
+			v_ptr->erase(it);
+		}
+	}
+	return;
+}
+
 Dictionary::Dictionary() {
 	feasible_values_dict = std::unordered_map<int, std::vector<int>>();
 }

@@ -7,10 +7,14 @@
 #include "Stack.h"
 #include "Dictionary.h"
 #include <fstream>
+#include <ctime>        // std::time
+#include <cstdlib> 
+#include <algorithm>
 class Matrix;
 class Entry {
 public:
-	int DEFAULT_INIT_COORD = -1;
+	static const int DEFAULT_INIT_COORD = -1;
+	static const int SIGN_OF_SUCCESS = -2;
 
 	friend class Matrix;
 	Entry() {
@@ -48,7 +52,13 @@ private:
 class Matrix {
 public:
 
-	friend int solve(Matrix m);
+	const Entry Sign_of_Success = Entry(Entry::SIGN_OF_SUCCESS, Entry::SIGN_OF_SUCCESS);
+	const Entry Sign_of_Failure = Entry(Entry::DEFAULT_INIT_COORD, Entry::DEFAULT_INIT_COORD);
+
+	bool solve();
+	bool solve(Entry current_entry);
+	Entry get_next_to_update() const;
+
 
 	friend std::ostream& operator << (std::ostream& os, const Matrix& m);
 	Matrix();
@@ -75,11 +85,12 @@ public:
 
 	std::vector<Entry> get_square(Entry coord)const;
 
-	std::vector<int> default_feasible_values();
+	std::vector<int> default_feasible_values() const;
 
 	std::vector<int> get_feasbile_values(Entry e) const;
 
 	void remove_feasible_value_from_entry(Entry e, int num);
+	void remove_all_feasible_values_from_entry(Entry e);
 
 	void init();
 private:
@@ -88,6 +99,8 @@ private:
 	int level = 0;
 	Stack<Dictionary> feasible_values_dict_stack;
 	//std::unordered_map<int, std::vector<int>> feasible_values_dict;
+
+
 
 };
 #endif
