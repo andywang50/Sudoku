@@ -12,7 +12,7 @@ using namespace std;
 
 int main() {
 	srand(unsigned(std::time(0)));
-
+	/*
 	Stack<int> test = Stack<int>();
 	test.push(1);
 	test.push(2);
@@ -93,6 +93,7 @@ int main() {
 
 	test_Stack.push(test_dict);
 	test_Stack.pop();
+	*/
 	/*
 	unordered_map<char, vector<int>> test;
 	test['a'] = {1,2,3};
@@ -103,7 +104,7 @@ int main() {
 		v->erase(it);
 	cout << "A" << endl;
 	*/
-	
+	/*
 	Matrix sudoku0 = Matrix(9);
 	Entry test_entry = Entry(4, 4);
 	vector<Entry> row_list = sudoku0.get_row(test_entry);
@@ -138,22 +139,19 @@ int main() {
 	test_entry3 = Entry(5, 5);
 	cout << (test_entry3 != test_entry) << endl;
 	
-
-	Matrix sudoku_file = Matrix("sudoku.txt");
-	cout << sudoku_file << endl;
-	sudoku_file.remove_feasible_value_from_entry(testEntry1, 4);
-	std::vector<int> sudoku_file_4_4 = sudoku_file.get_feasbile_values(testEntry1);
-
-	for (int num : sudoku_file_4_4) cout << num << " ";
-	cout << endl;
-
-
-	Entry failure_sign = Entry(Entry::DEFAULT_INIT_COORD, Entry::DEFAULT_INIT_COORD);
-	cout << "failure equals failure: " << (failure_sign == sudoku.Sign_of_Failure )<< endl;
-	Entry success_Sign = Entry(Entry::SIGN_OF_SUCCESS, Entry::SIGN_OF_SUCCESS);
-	cout << "success equals success: " << (success_Sign == sudoku.Sign_of_Success )<< endl;
+	*/
+	Matrix sudoku_file = Matrix("sudoku100.txt");
+	
+//	Entry success_Sign = Entry(Entry::SIGN_OF_SUCCESS, Entry::SIGN_OF_SUCCESS);
+//	cout << "success equals success: " << (success_Sign == sudoku.Sign_of_Success )<< endl;
 
 	cout << sudoku_file.solve() << endl;
+	cout << sudoku_file << endl;
+
+	Matrix sudoku = Matrix(9);
+	cout << sudoku.solve() << endl;
+	cout << sudoku_file.solve() << endl;
+	cout << sudoku << endl;
 	cout << sudoku_file << endl;
 	return 0;
 }

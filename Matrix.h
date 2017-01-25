@@ -15,7 +15,6 @@ class Entry {
 public:
 	static const int DEFAULT_INIT_COORD = -1;
 	static const int SIGN_OF_SUCCESS = -2;
-
 	friend class Matrix;
 	Entry() {
 		row_coord = DEFAULT_INIT_COORD;
@@ -51,15 +50,17 @@ private:
 
 class Matrix {
 public:
+	bool is_complete() const;
 
-	const Entry Sign_of_Success = Entry(Entry::SIGN_OF_SUCCESS, Entry::SIGN_OF_SUCCESS);
+	//const Entry Sign_of_Success = Entry(Entry::SIGN_OF_SUCCESS, Entry::SIGN_OF_SUCCESS);
 	const Entry Sign_of_Failure = Entry(Entry::DEFAULT_INIT_COORD, Entry::DEFAULT_INIT_COORD);
 
 	bool solve();
-	bool solve(Entry current_entry);
+	bool solve(Entry current_entry, std::ofstream& fout);
 	Entry get_next_to_update() const;
 
-
+	void printlogpush(std::ofstream& fout, Entry current_entry, int guess);
+	void printlogpop(std::ofstream& fout, Entry current_entry);
 	friend std::ostream& operator << (std::ostream& os, const Matrix& m);
 	Matrix();
 	Matrix(int N);

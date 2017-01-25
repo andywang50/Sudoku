@@ -61,7 +61,6 @@ Matrix::Matrix(const Matrix& b) {
 			sudoku[i][j] = b.sudoku[i][j];
 		}
 	}
-	init();
 }
 
 Matrix& Matrix::operator = (const Matrix& b) {
@@ -76,7 +75,6 @@ Matrix& Matrix::operator = (const Matrix& b) {
 			}
 		}
 	}
-	init();
 	return *this;
 }
 

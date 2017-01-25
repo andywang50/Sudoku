@@ -1,0 +1,276 @@
+trying (1, 6) with 7
+  trying (1, 2) with 4
+    trying (1, 8) with 9
+      trying (0, 8) with 5
+        trying (4, 8) with 6
+          trying (4, 6) with 3
+            trying (8, 8) with 7
+              trying (5, 8) with 8
+                trying (8, 7) with 9
+                  trying (6, 7) with 8
+                    trying (2, 7) with 2
+                      trying (2, 6) with 8
+                        trying (2, 1) with 6
+                          trying (3, 6) with 2
+                            trying (8, 0) with 6
+                              trying (8, 6) with 1
+                                trying (8, 3) with 4
+                                  trying (7, 0) with 7
+                                    trying (3, 0) with 5
+                                    pop (3, 0)
+                                  pop (7, 0)
+                                pop (8, 3)
+                              pop (8, 6)
+                            trying (8, 0) with 2
+                              trying (0, 0) with 7
+                                trying (0, 1) with 2
+                                pop (0, 1)
+                              trying (0, 0) with 3
+                                trying (5, 7) with 5
+                                  trying (3, 7) with 7
+                                    trying (3, 1) with 9
+                                      trying (4, 2) with 7
+                                        trying (6, 1) with 7
+                                          trying (4, 0) with 5
+                                            trying (3, 0) with 6
+                                            pop (3, 0)
+                                          pop (4, 0)
+                                        pop (6, 1)
+                                      pop (4, 2)
+                                    pop (3, 1)
+                                  pop (3, 7)
+                                trying (5, 7) with 7
+                                  trying (3, 7) with 5
+                                    trying (3, 1) with 7
+                                      trying (3, 0) with 6
+                                        trying (4, 2) with 9
+                                          trying (6, 1) with 9
+                                            trying (4, 0) with 5
+                                              trying (6, 5) with 6
+                                                trying (6, 2) with 7
+                                                pop (6, 2)
+                                              pop (6, 5)
+                                            pop (4, 0)
+                                          pop (6, 1)
+                                        pop (4, 2)
+                                      pop (3, 0)
+                                    trying (3, 1) with 9
+                                      trying (4, 2) with 7
+                                        trying (3, 0) with 6
+                                          trying (6, 1) with 7
+                                          pop (6, 1)
+                                        pop (3, 0)
+                                      pop (4, 2)
+                                    pop (3, 1)
+                                  pop (3, 7)
+                                pop (5, 7)
+                              pop (0, 0)
+                            pop (8, 0)
+                          pop (3, 6)
+                        pop (2, 1)
+                      pop (2, 6)
+                    pop (2, 7)
+                  pop (6, 7)
+                pop (8, 7)
+              pop (5, 8)
+            pop (8, 8)
+          pop (4, 6)
+        trying (4, 8) with 7
+          trying (8, 8) with 6
+            trying (5, 8) with 8
+              trying (8, 6) with 1
+                trying (7, 6) with 8
+                  trying (2, 6) with 2
+                    trying (2, 1) with 6
+                      trying (2, 7) with 8
+                        trying (3, 6) with 6
+                          trying (4, 6) with 3
+                            trying (8, 0) with 7
+                              trying (8, 7) with 9
+                                trying (7, 0) with 6
+                                  trying (7, 2) with 9
+                                    trying (7, 3) with 7
+                                      trying (4, 2) with 6
+                                        trying (4, 0) with 5
+                                          trying (3, 0) with 2
+                                            trying (0, 0) with 3
+                                              trying (3, 7) with 5
+                                                trying (8, 3) with 4
+                                                  trying (3, 3) with 9
+                                                  pop (3, 3)
+                                                pop (8, 3)
+                                              pop (3, 7)
+                                            pop (0, 0)
+                                          pop (3, 0)
+                                        pop (4, 0)
+                                      pop (4, 2)
+                                    pop (7, 3)
+                                  pop (7, 2)
+                                pop (7, 0)
+                              pop (8, 7)
+                            trying (8, 0) with 2
+                              trying (0, 0) with 7
+                                trying (3, 0) with 5
+                                  trying (3, 7) with 2
+                                    trying (5, 7) with 5
+                                      trying (0, 1) with 2
+                                      pop (0, 1)
+                                    pop (5, 7)
+                                  pop (3, 7)
+                                pop (3, 0)
+                              trying (0, 0) with 3
+                                trying (5, 7) with 5
+                                  trying (3, 7) with 2
+                                    trying (3, 0) with 7
+                                      trying (7, 0) with 6
+                                        trying (4, 0) with 5
+                                          trying (3, 1) with 9
+                                            trying (4, 2) with 6
+                                              trying (6, 1) with 7
+                                                trying (3, 5) with 4
+                                                  trying (7, 2) with 9
+                                                    trying (7, 3) with 7
+                                                      trying (6, 2) with 8
+                                                        trying (3, 3) with 5
+                                                          trying (5, 3) with 6
+                                                            trying (0, 1) with 2
+                                                              trying (6, 7) with 9
+                                                                trying (5, 5) with 3
+                                                                  trying (5, 4) with 7
+                                                                    trying (5, 2) with 2
+                                                                      trying (4, 4) with 9
+                                                                        trying (0, 4) with 6
+                                                                          trying (6, 4) with 2
+                                                                            trying (0, 2) with 7
+                                                                              trying (7, 4) with 1
+                                                                                trying (1, 5) with 1
+                                                                                  trying (2, 3) with 4
+                                                                                    trying (8, 3) with 9
+                                                                                      trying (0, 5) with 9
+                                                                                        trying (6, 5) with 6
+                                                                                          trying (8, 7) with 7
+                                                                                            trying (5, 1) with 1
+                                                                                              trying (3, 4) with 8
+                                                                                                trying (2, 4) with 5
+                                                                                                  trying (1, 4) with 3
+                                                                                                    trying (8, 4) with 4
+First success!
+                                                                                                    pop (8, 4)
+                                                                                                  pop (1, 4)
+                                                                                                pop (2, 4)
+                                                                                              pop (3, 4)
+                                                                                            pop (5, 1)
+                                                                                          pop (8, 7)
+                                                                                        pop (6, 5)
+                                                                                      pop (0, 5)
+                                                                                    pop (8, 3)
+                                                                                  pop (2, 3)
+                                                                                pop (1, 5)
+                                                                              pop (7, 4)
+                                                                            pop (0, 2)
+                                                                          pop (6, 4)
+                                                                        pop (0, 4)
+                                                                      pop (4, 4)
+                                                                    pop (5, 2)
+                                                                  pop (5, 4)
+                                                                pop (5, 5)
+                                                              pop (6, 7)
+                                                            pop (0, 1)
+                                                          pop (5, 3)
+                                                        pop (3, 3)
+                                                      pop (6, 2)
+                                                    pop (7, 3)
+                                                  pop (7, 2)
+                                                pop (3, 5)
+                                              pop (6, 1)
+                                            pop (4, 2)
+                                          pop (3, 1)
+                                        pop (4, 0)
+                                      pop (7, 0)
+                                    trying (3, 0) with 5
+                                      trying (4, 0) with 6
+                                        trying (4, 2) with 9
+                                          trying (4, 4) with 5
+                                            trying (7, 0) with 7
+                                              trying (7, 2) with 6
+                                                trying (7, 3) with 9
+                                                  trying (6, 2) with 8
+                                                    trying (6, 5) with 6
+                                                      trying (0, 5) with 9
+                                                        trying (5, 5) with 3
+                                                          trying (3, 5) with 4
+                                                            trying (3, 3) with 7
+                                                            pop (3, 3)
+                                                          pop (3, 5)
+                                                        pop (5, 5)
+                                                      pop (0, 5)
+                                                    pop (6, 5)
+                                                  pop (6, 2)
+                                                pop (7, 3)
+                                              pop (7, 2)
+                                            pop (7, 0)
+                                          pop (4, 4)
+                                        pop (4, 2)
+                                      pop (4, 0)
+                                    pop (3, 0)
+                                  pop (3, 7)
+                                trying (5, 7) with 2
+                                  trying (3, 7) with 5
+                                    trying (3, 0) with 7
+                                      trying (7, 0) with 6
+                                        trying (5, 1) with 1
+                                          trying (4, 0) with 5
+                                            trying (5, 2) with 6
+                                              trying (4, 2) with 9
+                                                trying (4, 4) with 6
+                                                  trying (7, 2) with 7
+                                                    trying (7, 3) with 9
+                                                      trying (6, 2) with 8
+                                                        trying (6, 5) with 6
+                                                          trying (5, 5) with 3
+                                                            trying (3, 3) with 4
+                                                              trying (6, 1) with 9
+                                                                trying (6, 7) with 7
+                                                                  trying (6, 4) with 2
+                                                                    trying (3, 1) with 2
+                                                                      trying (0, 1) with 7
+                                                                        trying (8, 3) with 7
+                                                                          trying (3, 5) with 9
+                                                                          pop (3, 5)
+                                                                        pop (8, 3)
+                                                                      pop (0, 1)
+                                                                    pop (3, 1)
+                                                                  pop (6, 4)
+                                                                pop (6, 7)
+                                                              pop (6, 1)
+                                                            pop (3, 3)
+                                                          pop (5, 5)
+                                                        pop (6, 5)
+                                                      pop (6, 2)
+                                                    pop (7, 3)
+                                                  pop (7, 2)
+                                                pop (4, 4)
+                                              pop (4, 2)
+                                            pop (5, 2)
+                                          pop (4, 0)
+                                        pop (5, 1)
+                                      pop (7, 0)
+                                    pop (3, 0)
+                                  pop (3, 7)
+                                pop (5, 7)
+                              pop (0, 0)
+                            pop (8, 0)
+                          pop (4, 6)
+                        pop (3, 6)
+                      pop (2, 7)
+                    pop (2, 1)
+                  pop (2, 6)
+                pop (7, 6)
+              pop (8, 6)
+            pop (5, 8)
+          pop (8, 8)
+        pop (4, 8)
+      pop (0, 8)
+    pop (1, 8)
+  pop (1, 2)
+pop (1, 6)
