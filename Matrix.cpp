@@ -40,12 +40,19 @@ Matrix::Matrix(int N) {
 		N = 9;
 	}
 	size = N;
-	sudoku = new int*[size];
-	for (int i = 0; i < size; i++) {
-		sudoku[i] = new int[size];
-		for (int j = 0; j < size; j++) {
-			sudoku[i][j] = 0;
+	try {
+		sudoku = new int*[size];
+	
+		for (int i = 0; i < size; i++) {
+
+			sudoku[i] = new int[size];
+			for (int j = 0; j < size; j++) {
+				sudoku[i][j] = 0;
+			}
 		}
+	}
+	catch (std::exception e) {
+		std::cout << "Error when initializing matrix with size " << N << ".\n";
 	}
 	init();
 }
@@ -53,12 +60,17 @@ Matrix::Matrix(int N) {
 Matrix::Matrix(const Matrix& b) {
 	size = b.size;
 	this->feasible_values_dict_stack = b.feasible_values_dict_stack;
-	sudoku = new int*[size];
-	for (int i = 0; i < size; i++) {
-		sudoku[i] = new int[size];
-		for (int j = 0; j < size; j++) {
-			sudoku[i][j] = b.sudoku[i][j];
+	try {
+		sudoku = new int*[size];
+		for (int i = 0; i < size; i++) {
+			sudoku[i] = new int[size];
+			for (int j = 0; j < size; j++) {
+				sudoku[i][j] = b.sudoku[i][j];
+			}
 		}
+	}
+	catch (std::exception e) {
+		std::cout << "Error in Matrix copy constructor.\n";
 	}
 	
 }
@@ -79,38 +91,43 @@ Matrix::~Matrix() {
 Matrix::Matrix(std::string filename)
 {
 	std::ifstream myfile;
-	myfile.open(filename);
-	std::string line;
-	int file_indicated_size = -1;
-	int row = 0;
-	if (myfile.is_open()) {
-		while (std::getline(myfile, line)) {
-			if (file_indicated_size == -1) {
-				file_indicated_size = atoi(line.c_str());
-				size = file_indicated_size;
-				delete[] sudoku;			
-				sudoku = new int*[size];
-				for (int i = 0; i < size; i++) {
-					sudoku[i] = new int[size];
-					for (int j = 0; j < size; j++) {
-						sudoku[i][j] = 0;
+	try {
+		myfile.open(filename);
+		std::string line;
+		int file_indicated_size = -1;
+		int row = 0;
+		if (myfile.is_open()) {
+			while (std::getline(myfile, line)) {
+				if (file_indicated_size == -1) {
+					file_indicated_size = atoi(line.c_str());
+					size = file_indicated_size;
+					delete[] sudoku;
+					sudoku = new int*[size];
+					for (int i = 0; i < size; i++) {
+						sudoku[i] = new int[size];
+						for (int j = 0; j < size; j++) {
+							sudoku[i][j] = 0;
+						}
 					}
 				}
-			}
-			else {
-				for (int col = 0; col < size; col++) {
-					int num = line[col] - '0';
-					sudoku[row][col] = num;
+				else {
+					for (int col = 0; col < size; col++) {
+						int num = line[col] - '0';
+						sudoku[row][col] = num;
 
+					}
+					row++;
 				}
-				row++;
 			}
+			myfile.close();
+			init();
 		}
-		myfile.close();
-		init();
+		else {
+			std::cout << "unable" << std::endl;
+		}
 	}
-	else {
-		std::cout << "unable" << std::endl;
+	catch (std::exception e) {
+		std::cout << "Error when reading matrix from file.\n";
 	}
 }
 

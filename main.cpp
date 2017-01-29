@@ -13,34 +13,6 @@ using namespace std;
 int main() {
 	srand(unsigned(std::time(0)));
 
-	Stack<int> test = Stack<int>();
-	test.push(1);
-	test.push(2);
-
-	
-	Stack<int> test1 = Stack<int>(test);
-	
-
-	Stack<int> test2 = Stack<int>();
-	test2 = test1;
-
-
-	while (test.get_length() > 0) {
-		cout << test.pop() << endl;
-
-	}
-	while (test1.get_length() > 0) {
-		cout << test1.pop() << endl;
-
-	}
-	while (test2.get_length() > 0) {
-		cout << test2.pop() << endl;
-
-	}
-
-	Stack<int> test3 = Stack<int>(test2);
-	
-	
 	Matrix sudoku = Matrix(9);
 	cout << "0" << endl;
 	cout << sudoku << endl << endl;
@@ -83,19 +55,6 @@ int main() {
 
 	for (int num : sudoku3_4_4) cout << num << " ";
 	cout << endl;
-
-
-	
-	
-
-	unordered_map<int, vector<int>> test_dict = unordered_map<int, vector<int>>();
-
-	Stack<unordered_map<int, vector<int>>> test_Stack;
-
-	test_Stack.push(test_dict);
-	test_Stack.pop();
-	
-	
 
 	Matrix sudoku0 = Matrix(9);
 	Entry test_entry = Entry(4, 4);

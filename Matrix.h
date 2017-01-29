@@ -59,6 +59,8 @@ public:
 	bool solve(Entry current_entry, std::ofstream& fout);
 	Entry get_next_to_update() const;
 
+	void generate();
+
 	void printlogpush(std::ofstream& fout, Entry current_entry, int guess);
 	void printlogpop(std::ofstream& fout, Entry current_entry);
 	friend std::ostream& operator << (std::ostream& os, const Matrix& m);

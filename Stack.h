@@ -33,13 +33,24 @@ Stack<T>::Stack() {
 template <typename T>
 void Stack<T>::push(const T& newData) {
 	if (!(first == 0)) {
-		Node<T>* newNode = new Node<T>(newData);
-		newNode->next = first;
-		first = newNode;
+		try {
+			Node<T>* newNode = new Node<T>(newData);
+			newNode->next = first;
+			first = newNode;
+		}
+		catch (std::exception e) {
+			std::cout << "Error in stakc push.\n";
+		}
+
 	}
 	else {
-		Node<T>* newNode = new Node<T>(newData);
-		first = newNode;
+		try {
+			Node<T>* newNode = new Node<T>(newData);
+			first = newNode;
+		}
+		catch (std::exception e) {
+			std::cout << "Error in stakc push.\n";
+		}	
 	}
 	length++;
 }
@@ -77,15 +88,25 @@ void Stack<T>::deep_copy(const Stack<T>& b) {
 	Node<T>* iter = b.first;
 	while (iter != 0) {
 		if (length == 0) {
-			Node<T>* newNode = new Node<T>(iter->data);
-			first = newNode;
-			previous = newNode;
+			try{
+				Node<T>* newNode = new Node<T>(iter->data);
+				first = newNode;
+				previous = newNode;
+			}
+			catch (std::exception e){
+				std::cout << "Error in deep_copy of Stack.\n";
+			}
 
 		}
 		else {
-			Node<T>* newNode = new Node<T>(iter->data);
-			previous->next = newNode;
-			previous = newNode;
+			try {
+				Node<T>* newNode = new Node<T>(iter->data);
+				previous->next = newNode;
+				previous = newNode;
+			}
+			catch (std::exception e) {
+				std::cout << "Error in deep_copy of Stack.\n";
+			}
 		}
 		iter = iter->next;
 		length++;

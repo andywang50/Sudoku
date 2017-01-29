@@ -105,6 +105,10 @@ Entry Matrix::get_next_to_update() const {
 	return next_to_update;
 }
 
+void Matrix::generate()
+{
+}
+
 void Matrix::printlogpush(std::ofstream & fout, Entry current_entry, int guess)
 {
 	int l = this->feasible_values_dict_stack.get_length();
