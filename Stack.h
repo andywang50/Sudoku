@@ -7,7 +7,7 @@ template <typename T>
 class Stack {
 public:
 	Stack();
-
+	bool is_Empty() const { return first == 0; }
 	void push(const T& newData);
 	T pop();
 

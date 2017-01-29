@@ -222,6 +222,6 @@ void Matrix::init()
 
 		}
 	}
-	
+	feasible_values_dict_stack = Stack<Dictionary>();
 	feasible_values_dict_stack.push(feasible_values_dict);
 }

@@ -15,12 +15,7 @@ bool Matrix::is_complete() const {
 	return finished;
 }
 
-bool Matrix::solve() {
-	bool solved = false;
-	std::ofstream fout;
-	fout.open("log.txt");
-	if (is_complete()) return true;
-	// remember to initialize. i.e. remove all feasible values if sudoku[i][j] != 0;
+void Matrix::update_status() {
 	for (int row = 0; row < size; row++) {
 		for (int col = 0; col < size; col++) {
 			int num = sudoku[row][col];
@@ -29,8 +24,7 @@ bool Matrix::solve() {
 				this->remove_all_feasible_values_from_entry(current_entry);
 				for (Entry other_entry : this->get_row(current_entry)) {
 					int other_entry_row = other_entry.row_coord;
-					int other_entry_col = other_entry.col_coord;
-					int other_entry_key = other_entry_row*size + other_entry_col;
+					int other_entry_col = other_entry.col_coord;					
 					if (sudoku[other_entry_row][other_entry_col] == 0) {
 						remove_feasible_value_from_entry(other_entry, num);
 					}
@@ -38,7 +32,6 @@ bool Matrix::solve() {
 				for (Entry other_entry : this->get_col(current_entry)) {
 					int other_entry_row = other_entry.row_coord;
 					int other_entry_col = other_entry.col_coord;
-					int other_entry_key = other_entry_row*size + other_entry_col;
 					if (sudoku[other_entry_row][other_entry_col] == 0) {
 						remove_feasible_value_from_entry(other_entry, num);
 					}
@@ -46,7 +39,6 @@ bool Matrix::solve() {
 				for (Entry other_entry : this->get_square(current_entry)) {
 					int other_entry_row = other_entry.row_coord;
 					int other_entry_col = other_entry.col_coord;
-					int other_entry_key = other_entry_row*size + other_entry_col;
 					if (sudoku[other_entry_row][other_entry_col] == 0) {
 						remove_feasible_value_from_entry(other_entry, num);
 					}
@@ -54,6 +46,15 @@ bool Matrix::solve() {
 			}
 		}
 	}
+}
+
+bool Matrix::solve() {
+	bool solved = false;
+	std::ofstream fout;
+	fout.open("log.txt");
+	if (is_complete()) return true;
+	// remember to initialize. i.e. remove all feasible values if sudoku[i][j] != 0;
+	update_status();
 	Entry next_to_update = get_next_to_update();
 	std::cout << next_to_update << std::endl;
 	if (next_to_update == this->Sign_of_Failure) {
@@ -105,8 +106,55 @@ Entry Matrix::get_next_to_update() const {
 	return next_to_update;
 }
 
-void Matrix::generate()
-{
+void Matrix::generate(){
+	if (size == 0) {
+		std::cout << "Error! size = 0!\n";
+		return;
+	}
+	
+	std::vector<Entry> entry_vector = std::vector<Entry>();
+
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			Entry current_entry = Entry(i, j);
+			sudoku[i][j] = 0;
+			entry_vector.push_back(current_entry);
+		}
+	}
+	solve_no_log_init(Entry(0,0));
+	std::cout << "randomly generate from empty:\n";
+	std::cout << *this;
+	std::cout << "\n";
+	std::random_shuffle(entry_vector.begin(), entry_vector.end());
+	init();
+	int count = 0;
+
+	for (Entry current_entry : entry_vector) {
+		Dictionary old_dict = Dictionary();
+		while (!feasible_values_dict_stack.is_Empty()) old_dict =feasible_values_dict_stack.pop();
+		feasible_values_dict_stack.push(old_dict);
+		int row = current_entry.row_coord;
+		int col = current_entry.col_coord;
+		int key = row*size + col;
+		int num = sudoku[row][col];
+		//std::cout << "(" << row << "," << col << ")" << "=" << num << "\n";
+		Dictionary new_dict = old_dict;
+		new_dict.remove_feasible_value_from_entry(key, num);
+		this->feasible_values_dict_stack.push(new_dict);
+		sudoku[row][col] = 0;
+		//std::vector<int> v = get_feasbile_values(current_entry);
+		//std::cout << v.size() << '\n';
+		if (new_dict.get_num_guesses(key) > 0) {
+			//std::cout << count << " " << new_dict.get_num_guesses(key) << std::endl;
+			bool flag =  solve_no_log_init(current_entry);
+			if (flag != 0) {
+				sudoku[row][col] = num;
+			}
+					
+		}
+
+	}
+	
 }
 
 void Matrix::printlogpush(std::ofstream & fout, Entry current_entry, int guess)
@@ -189,3 +237,135 @@ bool Matrix::solve(Entry current_entry, std::ofstream& fout) {
 	return false;
 
 }
+
+bool Matrix::solve_no_log_init(Entry current_entry)
+{
+	bool solved = false;
+	if (is_complete()) return true;
+	// remember to initialize. i.e. remove all feasible values if sudoku[i][j] != 0;
+	update_status();
+	Entry next_to_update = current_entry;
+	//std::cout << next_to_update << std::endl;
+	if (next_to_update == this->Sign_of_Failure) {
+		solved = false;
+	}
+	else {
+		solved = solve_no_log(next_to_update);
+	}
+	return solved;
+}
+bool Matrix::solve_no_log(Entry current_entry)
+{
+
+	int row = current_entry.row_coord;
+	int col = current_entry.col_coord;
+	int key = row*size + col;
+	Dictionary old_dict = feasible_values_dict_stack.get_last_without_pop();
+	std::vector<int> possible_guesses = old_dict.get(key);
+	std::random_shuffle(possible_guesses.begin(), possible_guesses.end());
+	for (int guess : possible_guesses) {
+		
+		Dictionary new_dict = old_dict;
+		bool current_guess_feasible = true;
+		sudoku[row][col] = guess;
+
+		if (is_complete()) return true;
+		for (Entry other_entry : this->get_row(current_entry)) {
+			int other_entry_row = other_entry.row_coord;
+			int other_entry_col = other_entry.col_coord;
+			int other_entry_key = other_entry_row*size + other_entry_col;
+			if (sudoku[other_entry_row][other_entry_col] == 0) {
+				new_dict.remove_feasible_value_from_entry(other_entry_key, guess);
+			}
+		}
+		for (Entry other_entry : this->get_col(current_entry)) {
+			int other_entry_row = other_entry.row_coord;
+			int other_entry_col = other_entry.col_coord;
+			int other_entry_key = other_entry_row*size + other_entry_col;
+			if (sudoku[other_entry_row][other_entry_col] == 0) {
+				new_dict.remove_feasible_value_from_entry(other_entry_key, guess);
+			}
+		}
+		for (Entry other_entry : this->get_square(current_entry)) {
+			int other_entry_row = other_entry.row_coord;
+			int other_entry_col = other_entry.col_coord;
+			int other_entry_key = other_entry_row*size + other_entry_col;
+			if (sudoku[other_entry_row][other_entry_col] == 0) {
+				new_dict.remove_feasible_value_from_entry(other_entry_key, guess);
+			}
+		}
+		new_dict.remove_all_feasible_values_from_entry(key);
+		feasible_values_dict_stack.push(new_dict);
+		Entry next_to_update = get_next_to_update();
+
+		// test this method to keep accord with the python file.
+		// this->feasible_values_dict_stack.pop();
+
+		if (next_to_update == this->Sign_of_Failure) {
+			this->feasible_values_dict_stack.pop();
+			continue;
+		}
+		else {
+			//this->feasible_values_dict_stack.push(new_dict);
+			bool flag = solve_no_log(next_to_update);
+			if (flag) return flag;
+			else feasible_values_dict_stack.pop();
+		}
+
+	}
+	sudoku[row][col] = 0;
+	//this->feasible_values_dict_stack.pop();
+	return false;
+
+}
+/*
+bool Matrix::solve_with_restriction(Entry removed_entry, int number_banned)
+{
+	bool solved = false;
+	if (is_complete()) return true;
+	remove_feasible_value_from_entry(removed_entry, number_banned);
+	for (int row = 0; row < size; row++) {
+		for (int col = 0; col < size; col++) {
+			int num = sudoku[row][col];
+			if (num != 0) {
+				Entry current_entry = Entry(row, col);
+				this->remove_all_feasible_values_from_entry(current_entry);
+				for (Entry other_entry : this->get_row(current_entry)) {
+					int other_entry_row = other_entry.row_coord;
+					int other_entry_col = other_entry.col_coord;
+					int other_entry_key = other_entry_row*size + other_entry_col;
+					if (sudoku[other_entry_row][other_entry_col] == 0) {
+						remove_feasible_value_from_entry(other_entry, num);
+					}
+				}
+				for (Entry other_entry : this->get_col(current_entry)) {
+					int other_entry_row = other_entry.row_coord;
+					int other_entry_col = other_entry.col_coord;
+					int other_entry_key = other_entry_row*size + other_entry_col;
+					if (sudoku[other_entry_row][other_entry_col] == 0) {
+						remove_feasible_value_from_entry(other_entry, num);
+					}
+				}
+				for (Entry other_entry : this->get_square(current_entry)) {
+					int other_entry_row = other_entry.row_coord;
+					int other_entry_col = other_entry.col_coord;
+					int other_entry_key = other_entry_row*size + other_entry_col;
+					if (sudoku[other_entry_row][other_entry_col] == 0) {
+						remove_feasible_value_from_entry(other_entry, num);
+					}
+				}
+			}
+		}
+	}
+	Entry next_to_update = get_next_to_update();
+	std::cout << next_to_update << std::endl;
+	if (next_to_update == this->Sign_of_Failure) {
+		solved = false;
+	}
+	else {
+		solved = solve_no_log(next_to_update);
+	}
+	return solved;
+	
+}
+*/

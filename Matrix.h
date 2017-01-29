@@ -57,6 +57,14 @@ public:
 
 	bool solve();
 	bool solve(Entry current_entry, std::ofstream& fout);
+	bool solve_no_log_init(Entry current_entry);
+	bool solve_no_log(Entry current_entry);
+
+	void update_status();
+
+	//bool solve_with_restriction(Entry removed_entry, int number_banned);
+
+
 	Entry get_next_to_update() const;
 
 	void generate();

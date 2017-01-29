@@ -91,10 +91,15 @@ int main() {
 	cout << (test_entry3 != test_entry) << endl;
 	
 	
-	Matrix sudoku_file = Matrix("sudoku100.txt");
+	Matrix sudoku_file = Matrix("sudokutest.txt");
 
 
 	cout << sudoku_file.solve() << endl;
 	cout << sudoku_file << endl;
+	
+	Matrix generate_sudoku = Matrix(9);
+	generate_sudoku.generate();
+	cout << "newly generated\n";
+	cout << generate_sudoku << endl;
 	return 0;
 }
