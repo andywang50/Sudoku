@@ -13,14 +13,15 @@ public:
 
 	T get_last_without_pop() const;
 
-	~Stack();
+	virtual ~Stack();
 	Stack(const Stack<T>& b);
-	Stack<T>& operator = (const Stack<T>& b);
+	Stack<T>& operator = (Stack<T> b);
 	int get_length();
 private:
 	int length;
 	void deep_copy(const Stack<T>& b);
 	Node<T>* first;
+	void swap(Stack<T>& b);
 };
 
 template <typename T>
@@ -91,18 +92,17 @@ void Stack<T>::deep_copy(const Stack<T>& b) {
 	}
 	
 }
+
 template <typename T>
 Stack<T>::Stack(const Stack<T>& b) {
 	first = 0;
+
 	deep_copy(b);
 }
 
 template <typename T>
-Stack<T>& Stack<T>::operator = (const Stack<T>& b) {
-	if (this != &b) {
-		this->~Stack();
-		deep_copy(b);
-	}
+Stack<T>& Stack<T>::operator = (Stack<T> b) {
+	swap(b);
 	return *this;
 }
 
@@ -114,6 +114,14 @@ Stack<T>:: ~Stack() {
 template <typename T>
 int Stack<T>::get_length() {
 	return this->length;
+}
+
+template<typename T>
+inline void Stack<T>::swap(Stack<T>& b)
+{
+	std::swap(length, b.length);
+	std::swap(first, b.first);
+
 }
 
 

@@ -1,0 +1,153 @@
+ trying ( 3,1 ) with guess 8.
+  trying ( 3,3 ) with guess 5.
+   trying ( 7,1 ) with guess 3.
+    trying ( 3,4 ) with guess 9.
+     trying ( 6,0 ) with guess 8.
+      trying ( 3,7 ) with guess 1.
+       trying ( 1,7 ) with guess 6.
+        trying ( 5,7 ) with guess 3.
+         trying ( 1,1 ) with guess 7.
+          trying ( 5,1 ) with guess 4.
+           trying ( 5,5 ) with guess 1.
+            trying ( 2,8 ) with guess 9.
+             trying ( 1,2 ) with guess 8.
+              trying ( 3,5 ) with guess 6.
+               trying ( 2,1 ) with guess 6.
+                trying ( 2,5 ) with guess 4.
+                 trying ( 4,5 ) with guess 3.
+                  trying ( 6,5 ) with guess 9.
+                   trying ( 0,3 ) with guess 3.
+                    trying ( 8,5 ) with guess 5.
+                     trying ( 6,7 ) with guess 2.
+                     pop ( 6,7 ).
+                    pop ( 8,5 ).
+                   pop ( 0,3 ).
+                  pop ( 6,5 ).
+                 pop ( 4,5 ).
+                pop ( 2,5 ).
+               pop ( 2,1 ).
+              pop ( 3,5 ).
+             pop ( 1,2 ).
+            pop ( 2,8 ).
+           pop ( 5,5 ).
+          pop ( 5,1 ).
+         pop ( 1,1 ).
+        pop ( 5,7 ).
+       pop ( 1,7 ).
+      trying ( 3,7 ) with guess 6.
+       trying ( 3,5 ) with guess 1.
+        trying ( 4,6 ) with guess 8.
+         trying ( 4,8 ) with guess 3.
+          trying ( 1,7 ) with guess 1.
+          pop ( 1,7 ).
+         pop ( 4,8 ).
+        pop ( 4,6 ).
+       pop ( 3,5 ).
+      pop ( 3,7 ).
+     trying ( 6,0 ) with guess 9.
+      trying ( 6,5 ) with guess 3.
+       trying ( 7,0 ) with guess 4.
+        trying ( 4,0 ) with guess 7.
+         trying ( 8,0 ) with guess 8.
+          trying ( 5,1 ) with guess 4.
+           trying ( 5,5 ) with guess 1.
+            trying ( 4,2 ) with guess 9.
+             trying ( 5,7 ) with guess 3.
+              trying ( 3,5 ) with guess 6.
+               trying ( 8,4 ) with guess 5.
+                trying ( 4,5 ) with guess 4.
+                pop ( 4,5 ).
+               pop ( 8,4 ).
+              pop ( 3,5 ).
+             pop ( 5,7 ).
+            pop ( 4,2 ).
+           pop ( 5,5 ).
+          pop ( 5,1 ).
+         pop ( 8,0 ).
+        pop ( 4,0 ).
+       trying ( 7,0 ) with guess 8.
+        trying ( 8,2 ) with guess 7.
+        pop ( 8,2 ).
+       pop ( 7,0 ).
+      pop ( 6,5 ).
+     pop ( 6,0 ).
+    trying ( 3,4 ) with guess 6.
+     trying ( 3,7 ) with guess 1.
+      trying ( 3,5 ) with guess 9.
+       trying ( 1,7 ) with guess 6.
+        trying ( 5,7 ) with guess 3.
+         trying ( 2,8 ) with guess 9.
+          trying ( 6,5 ) with guess 3.
+           trying ( 1,1 ) with guess 7.
+            trying ( 5,1 ) with guess 4.
+             trying ( 1,2 ) with guess 8.
+              trying ( 8,5 ) with guess 5.
+               trying ( 5,5 ) with guess 1.
+                trying ( 2,1 ) with guess 6.
+                 trying ( 4,5 ) with guess 4.
+                 pop ( 4,5 ).
+                pop ( 2,1 ).
+               pop ( 5,5 ).
+              pop ( 8,5 ).
+             pop ( 1,2 ).
+            pop ( 5,1 ).
+           pop ( 1,1 ).
+          pop ( 6,5 ).
+         pop ( 2,8 ).
+        pop ( 5,7 ).
+       pop ( 1,7 ).
+      pop ( 3,5 ).
+     pop ( 3,7 ).
+    pop ( 3,4 ).
+   trying ( 7,1 ) with guess 4.
+    trying ( 5,1 ) with guess 7.
+     trying ( 2,1 ) with guess 6.
+      trying ( 2,8 ) with guess 9.
+       trying ( 2,5 ) with guess 4.
+        trying ( 2,3 ) with guess 7.
+         trying ( 2,2 ) with guess 2.
+          trying ( 1,1 ) with guess 3.
+           trying ( 0,3 ) with guess 3.
+            trying ( 0,2 ) with guess 4.
+             trying ( 0,0 ) with guess 1.
+              trying ( 4,2 ) with guess 9.
+               trying ( 4,0 ) with guess 4.
+                trying ( 3,4 ) with guess 6.
+                 trying ( 1,4 ) with guess 5.
+                 pop ( 1,4 ).
+                trying ( 3,4 ) with guess 9.
+                 trying ( 3,7 ) with guess 1.
+                  trying ( 1,7 ) with guess 6.
+                   trying ( 1,4 ) with guess 5.
+                    trying ( 0,4 ) with guess 6.
+                     trying ( 1,8 ) with guess 1.
+                      trying ( 5,7 ) with guess 3.
+                       trying ( 3,5 ) with guess 6.
+                        trying ( 5,5 ) with guess 1.
+                         trying ( 5,4 ) with guess 8.
+                          trying ( 5,3 ) with guess 4.
+                           trying ( 4,5 ) with guess 3.
+                            trying ( 8,4 ) with guess 3.
+                             trying ( 6,5 ) with guess 9.
+                              trying ( 4,3 ) with guess 2.
+                               trying ( 4,4 ) with guess 7.
+                                trying ( 0,8 ) with guess 5.
+                                 trying ( 7,4 ) with guess 2.
+                                  trying ( 0,6 ) with guess 2.
+                                   trying ( 7,7 ) with guess 9.
+                                    trying ( 6,3 ) with guess 8.
+                                     trying ( 8,8 ) with guess 8.
+                                      trying ( 7,6 ) with guess 5.
+                                       trying ( 4,8 ) with guess 6.
+                                        trying ( 6,7 ) with guess 2.
+                                         trying ( 6,0 ) with guess 3.
+                                          trying ( 8,5 ) with guess 5.
+                                           trying ( 8,6 ) with guess 1.
+                                            trying ( 6,6 ) with guess 6.
+                                             trying ( 7,8 ) with guess 3.
+                                              trying ( 7,0 ) with guess 8.
+                                               trying ( 4,6 ) with guess 8.
+                                                trying ( 1,0 ) with guess 7.
+                                                 trying ( 1,2 ) with guess 8.
+                                                  trying ( 8,0 ) with guess 9.
+                                                   trying ( 8,2 ) with guess 7.

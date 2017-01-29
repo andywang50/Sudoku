@@ -36,7 +36,7 @@ public:
 		std::swap(row_coord, b.row_coord);
 		std::swap(col_coord, b.col_coord);
 	}
-	~Entry() {};
+	virtual ~Entry() {};
 
 	std::string toString() const { return "(" + std::to_string(this->row_coord) + "," + std::to_string(this->col_coord) + ")"; }
 
@@ -66,9 +66,9 @@ public:
 	Matrix(int N);
 
 	Matrix(const Matrix& b);
-	Matrix& operator = (const Matrix& b);
+	Matrix& operator = (Matrix b);
 
-	~Matrix();
+	virtual ~Matrix();
 
 	Matrix(std::string filename);
 
@@ -97,8 +97,11 @@ public:
 private:
 	int** sudoku;
 	int size = 0;
-	int level = 0;
 	Stack<Dictionary> feasible_values_dict_stack;
+	void swap(Matrix& b) {
+		std::swap(size, b.size);
+		std::swap(feasible_values_dict_stack, b.feasible_values_dict_stack);
+	}
 	//std::unordered_map<int, std::vector<int>> feasible_values_dict;
 
 

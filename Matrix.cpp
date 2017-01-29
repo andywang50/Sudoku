@@ -32,7 +32,6 @@ std::ostream& operator << (std::ostream& os, const Matrix& m) {
 
 Matrix::Matrix() {
 	size = 0;
-	level = 0;
 	init();
 }
 
@@ -61,25 +60,17 @@ Matrix::Matrix(const Matrix& b) {
 			sudoku[i][j] = b.sudoku[i][j];
 		}
 	}
+	
 }
 
-Matrix& Matrix::operator = (const Matrix& b) {
-	if (this != &b) {
-		size = b.size;
-		feasible_values_dict_stack = b.feasible_values_dict_stack;
-		sudoku = new int*[size];
-		for (int i = 0; i < size; i++) {
-			sudoku[i] = new int[size];
-			for (int j = 0; j < size; j++) {
-				sudoku[i][j] = b.sudoku[i][j];
-			}
-		}
-	}
+Matrix& Matrix::operator = (Matrix b) {
+	swap(b);
 	return *this;
 }
 
 Matrix::~Matrix() {
 	for (int i = 0; i < size; i++) {
+		//std::cout << "Matrix Destructor called\n";
 		delete[] sudoku[i];
 	}
 	delete[] sudoku;
@@ -214,6 +205,6 @@ void Matrix::init()
 
 		}
 	}
-	level++;
+	
 	feasible_values_dict_stack.push(feasible_values_dict);
 }
