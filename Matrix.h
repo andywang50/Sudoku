@@ -53,6 +53,7 @@ class Matrix {
 public:
 
 	friend class Sudoku_Solver;
+	friend class Sudoku_Generator;
 	bool is_complete() const;
 
 	

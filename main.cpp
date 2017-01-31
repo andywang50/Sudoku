@@ -1,7 +1,8 @@
 
 #include "Stack.h"
 #include "Matrix.h"
-#include "Sudoku_Solver.h"
+//#include "Sudoku_Solver.h"
+#include "Sudoku_Generator.h"
 #include <iostream>
 #include <vector>
 #include <unordered_map>
@@ -20,7 +21,17 @@ int main() {
 	Sudoku_Solver solver1 = Sudoku_Solver(sudoku_file);
 
 	cout << sudoku_file << endl;
-	cout << solver1.solve() << endl;
+	solver1.solve();
+	cout << solver1.get_matrix() << endl;
+	
+	Sudoku_Generator generator1 = Sudoku_Generator(9);
+
+	Matrix generated = generator1.generate();
+
+	cout << generated << endl;
+	
+	solver1 = Sudoku_Solver(generated);
+	solver1.solve();
 	cout << solver1.get_matrix() << endl;
 
 	return 0;

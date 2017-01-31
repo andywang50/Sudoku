@@ -115,12 +115,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Dictionary.cpp" />
+    <ClCompile Include="Sudoku_Generator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="Sudoku_Solver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dictionary.h" />
+    <ClInclude Include="Sudoku_Generator.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Stack.h" />

@@ -8,6 +8,7 @@
 class Sudoku_Solver {
 
 public:
+	friend class Sudoku_Generator;
 	Sudoku_Solver();
 	Sudoku_Solver(Matrix m);
 	Sudoku_Solver(int n);
@@ -19,11 +20,10 @@ public:
 
 	bool solve();
 	bool solve(Entry current_entry, std::ofstream& fout);
-	bool solve_no_log_init(Entry current_entry);
+	bool solve_no_log_init();
 	bool solve_no_log(Entry current_entry);
 	void update_status();
 	Entry get_next_to_update() const;
-	void generate();
 	void printlogpush(std::ofstream& fout, Entry current_entry, int guess);
 	void printlogpop(std::ofstream& fout, Entry current_entry);
 

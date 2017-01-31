@@ -33,22 +33,20 @@ void Sudoku_Solver::update_status() {
 	}
 }
 
-Sudoku_Solver::Sudoku_Solver()
-{
-	size = 0;
-	matrix = Matrix();
-	feasible_values_dict_stack = Stack<Dictionary>();
-}
+Sudoku_Solver::Sudoku_Solver():size(0),
+matrix(Matrix()),
+feasible_values_dict_stack(Stack<Dictionary>())
+{}
 
-Sudoku_Solver::Sudoku_Solver(Matrix m)
+Sudoku_Solver::Sudoku_Solver(Matrix m) : size(m.size),matrix(m),feasible_values_dict_stack(Stack<Dictionary>())
 {
-	matrix = m;
-	size = m.size;
 	init();
 }
 
 Sudoku_Solver::Sudoku_Solver(int n) {
 	size = n;
+	matrix = Matrix(n);
+	feasible_values_dict_stack = Stack<Dictionary>();
 	init();
 }
 
@@ -126,58 +124,7 @@ Entry Sudoku_Solver::get_next_to_update() const {
 
 	return next_to_update;
 }
-/*
-void Sudoku_Solver::generate(){
-	if (size == 0) {
-		std::cout << "Error! size = 0!\n";
-		return;
-	}
-	
-	std::vector<Entry> entry_vector = std::vector<Entry>();
 
-	for (int i = 0; i < size; i++) {
-		for (int j = 0; j < size; j++) {
-			Entry current_entry = Entry(i, j);
-			matrix.sudoku[i][j] = 0;
-			entry_vector.push_back(current_entry);
-		}
-	}
-	solve_no_log_init(Entry(0,0));
-	std::cout << "randomly generate from empty:\n";
-	std::cout << *this;
-	std::cout << "\n";
-	std::random_shuffle(entry_vector.begin(), entry_vector.end());
-	init();
-	int count = 0;
-
-	for (Entry current_entry : entry_vector) {
-		Dictionary old_dict = Dictionary();
-		while (!feasible_values_dict_stack.is_Empty()) old_dict =feasible_values_dict_stack.pop();
-		feasible_values_dict_stack.push(old_dict);
-		int row = current_entry.row_coord;
-		int col = current_entry.col_coord;
-		int key = row*size + col;
-		int num = matrix.sudoku[row][col];
-		//std::cout << "(" << row << "," << col << ")" << "=" << num << "\n";
-		Dictionary new_dict = old_dict;
-		new_dict.remove_feasible_value_from_entry(key, num);
-		this->feasible_values_dict_stack.push(new_dict);
-		sudoku[row][col] = 0;
-		//std::vector<int> v = get_feasbile_values(current_entry);
-		//std::cout << v.size() << '\n';
-		if (new_dict.get_num_guesses(key) > 0) {
-			//std::cout << count << " " << new_dict.get_num_guesses(key) << std::endl;
-			bool flag =  solve_no_log_init(current_entry);
-			if (flag != 0) {
-				sudoku[row][col] = num;
-			}
-					
-		}
-
-	}
-	
-}
-*/
 void Sudoku_Solver::printlogpush(std::ofstream & fout, Entry current_entry, int guess)
 {
 	int l = this->feasible_values_dict_stack.get_length();
@@ -259,13 +206,13 @@ bool Sudoku_Solver::solve(Entry current_entry, std::ofstream& fout) {
 
 }
 
-bool Sudoku_Solver::solve_no_log_init(Entry current_entry)
+bool Sudoku_Solver::solve_no_log_init()
 {
 	bool solved = false;
 	if (matrix.is_complete()) return true;
 	// remember to initialize. i.e. remove all feasible values if sudoku[i][j] != 0;
 	update_status();
-	Entry next_to_update = current_entry;
+	Entry next_to_update = get_next_to_update();
 	//std::cout << next_to_update << std::endl;
 	if (next_to_update == this->Sign_of_Failure) {
 		solved = false;
