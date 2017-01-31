@@ -32,6 +32,20 @@ std::ostream& operator << (std::ostream& os, const Matrix& m) {
 
 Matrix::Matrix() {
 	size = 0;
+	try {
+		sudoku = new int*[size];
+	
+		for (int i = 0; i < size; i++) {
+
+			sudoku[i] = new int[size];
+			for (int j = 0; j < size; j++) {
+				sudoku[i][j] = 0;
+			}
+		}
+	}
+	catch (std::exception e) {
+		std::cout << "Error in default constructor.\n";
+	}
 }
 
 Matrix::Matrix(int N) {
@@ -78,9 +92,11 @@ Matrix& Matrix::operator = (Matrix b) {
 }
 
 Matrix::~Matrix() {
-	for (int i = 0; i < size; i++) {
-		//std::cout << "Matrix Destructor called\n";
-		delete[] sudoku[i];
+	if (size > 0) {
+		for (int i = 0; i < size; i++) {
+			//std::cout << "Matrix Destructor called\n";
+			delete[] sudoku[i];
+		}
 	}
 	delete[] sudoku;
 }
@@ -89,6 +105,7 @@ Matrix::Matrix(std::string filename)
 {
 	std::ifstream myfile;
 	try {
+		//delete[] sudoku;
 		myfile.open(filename);
 		std::string line;
 		int file_indicated_size = -1;
@@ -98,7 +115,7 @@ Matrix::Matrix(std::string filename)
 				if (file_indicated_size == -1) {
 					file_indicated_size = atoi(line.c_str());
 					size = file_indicated_size;
-					delete[] sudoku;
+					
 					sudoku = new int*[size];
 					for (int i = 0; i < size; i++) {
 						sudoku[i] = new int[size];
