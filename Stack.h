@@ -26,7 +26,7 @@ private:
 
 template <typename T>
 Stack<T>::Stack() {
-	first = 0;
+	first = nullptr;
 	length = 0;
 }
 
@@ -63,7 +63,10 @@ T Stack<T>::pop() {
 		Node<T>* pos = first;
 		item = pos->data;
 		first = pos->next;
-		delete pos;
+		if (pos != nullptr) {
+			delete pos;
+			pos = nullptr;
+		}
 		length = length - 1;
 
 	}

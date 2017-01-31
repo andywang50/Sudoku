@@ -78,7 +78,7 @@ public:
 
 
 private:
-	int** sudoku;
+	int** sudoku = nullptr;
 	int size = 0;
 	void swap(Matrix& b) {
 		std::swap(size, b.size);

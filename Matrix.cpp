@@ -33,15 +33,8 @@ std::ostream& operator << (std::ostream& os, const Matrix& m) {
 Matrix::Matrix() {
 	size = 0;
 	try {
-		sudoku = new int*[size];
+		sudoku = nullptr;
 	
-		for (int i = 0; i < size; i++) {
-
-			sudoku[i] = new int[size];
-			for (int j = 0; j < size; j++) {
-				sudoku[i][j] = 0;
-			}
-		}
 	}
 	catch (std::exception e) {
 		std::cout << "Error in default constructor.\n";
@@ -95,17 +88,34 @@ Matrix::~Matrix() {
 	if (size > 0) {
 		for (int i = 0; i < size; i++) {
 			//std::cout << "Matrix Destructor called\n";
-			delete[] sudoku[i];
+			if (sudoku[i] != nullptr) {
+				delete[] sudoku[i];
+				sudoku[i] = nullptr;
+			}
 		}
 	}
-	delete[] sudoku;
+	if (sudoku != nullptr) {
+		delete[] sudoku;
+		sudoku = nullptr;
+	}
+	
 }
 
 Matrix::Matrix(std::string filename)
 {
 	std::ifstream myfile;
 	try {
-		//delete[] sudoku;
+		for (int i = 0; i < size; i++) {
+			
+			if (sudoku[i] != nullptr) {
+				delete[] sudoku[i];
+				sudoku[i] = nullptr;
+			}
+		}
+		if (sudoku != nullptr) {
+			delete[] sudoku;
+			sudoku = nullptr;
+		}
 		myfile.open(filename);
 		std::string line;
 		int file_indicated_size = -1;
