@@ -32,7 +32,6 @@ std::ostream& operator << (std::ostream& os, const Matrix& m) {
 
 Matrix::Matrix() {
 	size = 0;
-	init();
 }
 
 Matrix::Matrix(int N) {
@@ -54,12 +53,10 @@ Matrix::Matrix(int N) {
 	catch (std::exception e) {
 		std::cout << "Error when initializing matrix with size " << N << ".\n";
 	}
-	init();
 }
 
 Matrix::Matrix(const Matrix& b) {
 	size = b.size;
-	this->feasible_values_dict_stack = b.feasible_values_dict_stack;
 	try {
 		sudoku = new int*[size];
 		for (int i = 0; i < size; i++) {
@@ -120,7 +117,6 @@ Matrix::Matrix(std::string filename)
 				}
 			}
 			myfile.close();
-			init();
 		}
 		else {
 			std::cout << "unable" << std::endl;
@@ -131,97 +127,18 @@ Matrix::Matrix(std::string filename)
 	}
 }
 
-std::vector<Entry> Matrix::get_row(int row) const
-{
-	std::vector<Entry> row_list;
+bool Matrix::is_complete() const {
+	bool finished = true;
 	for (int i = 0; i < size; i++) {
-		row_list.push_back(Entry(row, i));
-	}
-	return row_list;
-}
-
-std::vector<Entry> Matrix::get_row(Entry coord) const
-{
-
-	return get_row(coord.row_coord);
-}
-
-std::vector<Entry> Matrix::get_col(int col) const
-{
-	std::vector<Entry> col_list;
-	for (int i = 0; i < size; i++) {
-		col_list.push_back(Entry(i, col));
-	}
-	return col_list;
-}
-
-std::vector<Entry> Matrix::get_col(Entry coord) const
-{
-	return get_col(coord.col_coord);
-}
-
-std::vector<Entry> Matrix::get_square(Entry coord) const
-{
-	std::vector<Entry> square_list;
-	int x = coord.row_coord / 3 *3;
-	int y = coord.col_coord / 3 *3;
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
-			Entry newEntry = Entry(x+i,y+j);
-			square_list.push_back(newEntry);
+		for (int j = 0; j < size; j++) {
+			if (sudoku[i][j] == 0) {
+				finished = false;
+				break;
+			}
 		}
+		if (!finished) break;
 	}
-	return square_list;
+	//std::cout << "Finished\n";
+	return finished;
 }
 
-std::vector<int> Matrix::default_feasible_values() const {
-	std::vector<int> fv;
-	for (int i = 1; i <= size; i++) fv.push_back(i);
-	return fv;
-}
-
-std::vector<int> Matrix::get_feasbile_values(Entry e) const
-{
-	Dictionary feasible_values_dict = feasible_values_dict_stack.get_last_without_pop();
-	int row = e.row_coord;
-	int col = e.col_coord;
-	int key = row*size + col;
-	return feasible_values_dict.get(key);
-}
-
-void Matrix::remove_feasible_value_from_entry(Entry e, int num)
-{
-	int row = e.row_coord;
-	int col = e.col_coord;
-	int key = row*size + col;
-	Dictionary feasible_values_dict = feasible_values_dict_stack.pop();
-	feasible_values_dict.remove_feasible_value_from_entry(key, num);
-	feasible_values_dict_stack.push(feasible_values_dict);
-	return;
-}
-
-void Matrix::remove_all_feasible_values_from_entry(Entry e)
-{
-	int row = e.row_coord;
-	int col = e.col_coord;
-	int key = row*size + col;
-	Dictionary feasible_values_dict = feasible_values_dict_stack.pop();
-	feasible_values_dict.remove_all_feasible_values_from_entry(key);
-	feasible_values_dict_stack.push(feasible_values_dict);
-	return;
-}
-
-void Matrix::init()
-{
-	Dictionary feasible_values_dict = Dictionary();
-	for (int row = 0; row < size; row++) {
-		for (int col = 0; col < size; col++) {
-			int key = row*size + col;
-			std::vector<int> fv = default_feasible_values();
-			feasible_values_dict.add(key, fv);
-
-		}
-	}
-	feasible_values_dict_stack = Stack<Dictionary>();
-	feasible_values_dict_stack.push(feasible_values_dict);
-}

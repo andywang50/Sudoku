@@ -5,7 +5,6 @@
 #include <vector>
 #include <unordered_map>
 #include "Stack.h"
-#include "Dictionary.h"
 #include <fstream>
 #include <ctime>        // std::time
 #include <cstdlib> 
@@ -13,9 +12,11 @@
 class Matrix;
 class Entry {
 public:
+
 	static const int DEFAULT_INIT_COORD = -1;
 	static const int SIGN_OF_SUCCESS = -2;
 	friend class Matrix;
+	friend class Sudoku_Solver;
 	Entry() {
 		row_coord = DEFAULT_INIT_COORD;
 		col_coord = DEFAULT_INIT_COORD;
@@ -50,27 +51,13 @@ private:
 
 class Matrix {
 public:
+
+	friend class Sudoku_Solver;
 	bool is_complete() const;
 
-	//const Entry Sign_of_Success = Entry(Entry::SIGN_OF_SUCCESS, Entry::SIGN_OF_SUCCESS);
-	const Entry Sign_of_Failure = Entry(Entry::DEFAULT_INIT_COORD, Entry::DEFAULT_INIT_COORD);
-
-	bool solve();
-	bool solve(Entry current_entry, std::ofstream& fout);
-	bool solve_no_log_init(Entry current_entry);
-	bool solve_no_log(Entry current_entry);
-
-	void update_status();
-
-	//bool solve_with_restriction(Entry removed_entry, int number_banned);
+	
 
 
-	Entry get_next_to_update() const;
-
-	void generate();
-
-	void printlogpush(std::ofstream& fout, Entry current_entry, int guess);
-	void printlogpop(std::ofstream& fout, Entry current_entry);
 	friend std::ostream& operator << (std::ostream& os, const Matrix& m);
 	Matrix();
 	Matrix(int N);
@@ -88,29 +75,13 @@ public:
 	int& operator ()(Entry coord) { return sudoku[coord.row_coord][coord.col_coord]; }
 	int operator ()(Entry coord) const { return sudoku[coord.row_coord][coord.col_coord]; }
 
-	std::vector<Entry> get_row(int row) const;
-	std::vector<Entry> get_row(Entry coord) const;
 
-	std::vector<Entry> get_col(int col) const;
-	std::vector<Entry> get_col(Entry coord)const;
-
-	std::vector<Entry> get_square(Entry coord)const;
-
-	std::vector<int> default_feasible_values() const;
-
-	std::vector<int> get_feasbile_values(Entry e) const;
-
-	void remove_feasible_value_from_entry(Entry e, int num);
-	void remove_all_feasible_values_from_entry(Entry e);
-
-	void init();
 private:
 	int** sudoku;
 	int size = 0;
-	Stack<Dictionary> feasible_values_dict_stack;
 	void swap(Matrix& b) {
 		std::swap(size, b.size);
-		std::swap(feasible_values_dict_stack, b.feasible_values_dict_stack);
+		std::swap(sudoku, b.sudoku);
 	}
 	//std::unordered_map<int, std::vector<int>> feasible_values_dict;
 
