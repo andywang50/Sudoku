@@ -12,7 +12,7 @@ std::ostream& operator << (std::ostream& os, const Matrix& m) {
 		for (int j = 0; j < m.size; j++) {
 			int num = m.sudoku[i][j];
 			if (num < 10) 
-				os << m.sudoku[i][j];
+				os << num;
 			else {
 				switch (num) {
 					case 10: os << "A"; break;
@@ -21,6 +21,7 @@ std::ostream& operator << (std::ostream& os, const Matrix& m) {
 					case 13: os << "D"; break;
 					case 14: os << "E"; break;
 					case 15: os << "F"; break;
+					case 16: os << "G"; break;
 				}
 
 			}
@@ -42,7 +43,7 @@ Matrix::Matrix() {
 }
 
 Matrix::Matrix(int N) {
-	if (N != 4 || N != 9 || N != 16) {
+	if (N != 4 && N != 9 && N != 16) {
 		N = 9;
 	}
 	size = N;

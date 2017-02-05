@@ -93,11 +93,11 @@ Entry Sudoku_Solver::get_next_to_update() const {
 	int next_to_update_key = -1;
 	Entry next_to_update = Sign_of_Failure;
 	bool feasible = true;
-	std::vector<int> rows = default_feasible_values();
+	std::vector<int> rows = dfv;
 	std::random_shuffle(rows.begin(), rows.end());
 	for (int row : rows) {
 		int x = row - 1;
-		std::vector<int> cols = default_feasible_values();
+		std::vector<int> cols = dfv;
 		std::random_shuffle(cols.begin(), cols.end());
 		for (int col : cols) {
 			int y = col - 1;
@@ -319,24 +319,25 @@ std::vector<Entry> Sudoku_Solver::get_col(Entry coord) const
 
 std::vector<Entry> Sudoku_Solver::get_square(Entry coord) const
 {
+	int a = sqrt(size);
 	std::vector<Entry> square_list;
-	int x = coord.row_coord / 3 * 3;
-	int y = coord.col_coord / 3 * 3;
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
+	int x = coord.row_coord / a * a;
+	int y = coord.col_coord / a * a;
+	for (int i = 0; i < a; i++) {
+		for (int j = 0; j < a; j++) {
 			Entry newEntry = Entry(x + i, y + j);
 			square_list.push_back(newEntry);
 		}
 	}
 	return square_list;
 }
-
+/*
 std::vector<int> Sudoku_Solver::default_feasible_values() const {
 	std::vector<int> fv;
 	for (int i = 1; i <= size; i++) fv.push_back(i);
 	return fv;
 }
-
+*/
 std::vector<int> Sudoku_Solver::get_feasbile_values(Entry e) const
 {
 	Dictionary feasible_values_dict = feasible_values_dict_stack.get_last_without_pop();
@@ -375,12 +376,12 @@ Matrix Sudoku_Solver::get_matrix() const
 
 void Sudoku_Solver::init()
 {
+	for (int i = 1; i <= size; i++) dfv.push_back(i);
 	Dictionary feasible_values_dict = Dictionary();
 	for (int row = 0; row < size; row++) {
 		for (int col = 0; col < size; col++) {
 			int key = row*size + col;
-			std::vector<int> fv = default_feasible_values();
-			feasible_values_dict.add(key, fv);
+			feasible_values_dict.add(key, dfv);
 
 		}
 	}

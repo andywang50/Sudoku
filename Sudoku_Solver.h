@@ -49,12 +49,13 @@ private:
 	int size = 0;
 	Stack<Dictionary> feasible_values_dict_stack;
 	Matrix matrix;
-
+	std::vector<int> dfv = std::vector<int>();
 
 	void swap(Sudoku_Solver& b) {
 		std::swap(feasible_values_dict_stack, b.feasible_values_dict_stack);
 		std::swap(size, b.size);
 		std::swap(matrix, b.matrix);
+		std::swap(dfv, b.dfv);
 	}
 
 };

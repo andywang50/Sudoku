@@ -11,6 +11,7 @@ Sudoku_Generator::Sudoku_Generator(int n)
 {
 	size = n;
 	matrix = Matrix(n);
+
 }
 
 Sudoku_Generator::Sudoku_Generator(const Sudoku_Generator & b)
@@ -72,10 +73,10 @@ Matrix Sudoku_Generator::generate() {
 			removed_count++;
 			cannot_remove_consecutive_count = 0;
 		}
-		if ((removed_count >= NUMBER_OF_ENTRIES_NEEDED_TO_BE_REMOVED_UPPER_THRESHOLD
+		if ((removed_count >= FRACT_OF_ENTRIES_NEEDED_TO_BE_REMOVED_UPPER_THRESHOLD*size*size
 			|| (cannot_remove_count >= NUMBER_OF_ENTRIES_FAILED_TO_REMOVE_THRESHOLD 
 			|| cannot_remove_consecutive_count >= NUMBER_OF_ENTRIES_FAILED_TO_REMOVE_CONSECUTIVELY_THRESHOLD)
-			&& removed_count >= NUMBER_OF_ENTRIES_NEEDED_TO_BE_REMOVED_LOWER_THRESHOLD)) break;
+			&& removed_count >= FRACT_OF_ENTRIES_NEEDED_TO_BE_REMOVED_LOWER_THRESHOLD*size*size)) break;
 		
 	}
 	return matrix;

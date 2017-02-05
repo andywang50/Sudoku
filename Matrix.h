@@ -83,6 +83,7 @@ private:
 	void swap(Matrix& b) {
 		std::swap(size, b.size);
 		std::swap(sudoku, b.sudoku);
+
 	}
 	//std::unordered_map<int, std::vector<int>> feasible_values_dict;
 

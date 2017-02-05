@@ -21,12 +21,12 @@ private:
 template <typename T>
 Node<T>::Node(const T& newData) {
 	data = newData;
-	next = 0;
+	next = nullptr;
 }
 
 template <typename T>
 Node<T>::Node() {
 	data = NULL;
-	next = 0;
+	next = nullptr;
 }
 #endif

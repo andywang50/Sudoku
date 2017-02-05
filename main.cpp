@@ -14,7 +14,7 @@ using namespace std;
 
 int main() {
 	srand(unsigned(std::time(0)));
-
+	/*
 	Matrix sudoku_file = Matrix("sudokutest.txt");
 	cout << sudoku_file << endl;
 
@@ -23,16 +23,19 @@ int main() {
 	cout << sudoku_file << endl;
 	solver1.solve();
 	cout << solver1.get_matrix() << endl;
-	
-	Sudoku_Generator generator1 = Sudoku_Generator(9);
+	*/
+	Sudoku_Generator generator1 = Sudoku_Generator(16);
 
 	Matrix generated = generator1.generate();
 
-	cout << generated << endl;
+	cout << generated << endl << endl;
+
 	
-	solver1 = Sudoku_Solver(generated);
-	solver1.solve();
-	cout << solver1.get_matrix() << endl;
+	Sudoku_Solver solver16 = Sudoku_Solver(generated);
+	solver16.solve();
+	cout << solver16.get_matrix() << endl;
+	
+
 
 	return 0;
 }
