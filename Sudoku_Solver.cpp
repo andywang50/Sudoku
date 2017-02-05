@@ -319,7 +319,7 @@ std::vector<Entry> Sudoku_Solver::get_col(Entry coord) const
 
 std::vector<Entry> Sudoku_Solver::get_square(Entry coord) const
 {
-	int a = sqrt(size);
+	int a = (int) sqrt(size);
 	std::vector<Entry> square_list;
 	int x = coord.row_coord / a * a;
 	int y = coord.col_coord / a * a;
