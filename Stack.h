@@ -2,7 +2,6 @@
 #define STACK
 
 #include "Node.h"
-#include <cstddef>
 template <typename T>
 class Stack {
 public:
@@ -26,7 +25,7 @@ private:
 
 template <typename T>
 Stack<T>::Stack() {
-	first = nullptr;
+	first = 0;
 	length = 0;
 }
 
@@ -63,9 +62,9 @@ T Stack<T>::pop() {
 		Node<T>* pos = first;
 		item = pos->data;
 		first = pos->next;
-		if (pos != nullptr) {
+		if (pos != 0) {
 			delete pos;
-			pos = nullptr;
+			pos = 0;
 		}
 		length = length - 1;
 
@@ -108,6 +107,7 @@ void Stack<T>::deep_copy(const Stack<T>& b) {
 				previous = newNode;
 			}
 			catch (std::exception e) {
+				
 				std::cout << "Error in deep_copy of Stack.\n";
 			}
 		}

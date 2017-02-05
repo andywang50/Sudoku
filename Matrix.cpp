@@ -49,17 +49,32 @@ Matrix::Matrix(int N) {
 	size = N;
 	try {
 		sudoku = new int*[size];
-	
-		for (int i = 0; i < size; i++) {
-
-			sudoku[i] = new int[size];
-			for (int j = 0; j < size; j++) {
-				sudoku[i][j] = 0;
-			}
-		}
 	}
 	catch (std::exception e) {
-		std::cout << "Error when initializing matrix with size " << N << ".\n";
+		delete[] sudoku;
+		sudoku = nullptr;
+		std::cout << "Error in constructor, step 1 " << std::endl;
+		return;
+	}
+	for (int i = 0; i < size; i++) {
+		try {
+			sudoku[i] = new int[size];
+		}
+		catch (std::exception e) {
+			for (int j = 0; j <= i; j++) {
+				delete[] sudoku[j];
+				sudoku[j] = nullptr;
+
+			}
+			std::cout << "Error in constructor, step 2, loop " << i << std::endl;
+			delete[] sudoku;
+			sudoku = nullptr;
+
+			return;
+		}
+		for (int j = 0; j < size; j++) {
+			sudoku[i][j] = 0;
+		}
 	}
 }
 
@@ -67,15 +82,32 @@ Matrix::Matrix(const Matrix& b) {
 	size = b.size;
 	try {
 		sudoku = new int*[size];
-		for (int i = 0; i < size; i++) {
-			sudoku[i] = new int[size];
-			for (int j = 0; j < size; j++) {
-				sudoku[i][j] = b.sudoku[i][j];
-			}
-		}
 	}
 	catch (std::exception e) {
-		std::cout << "Error in Matrix copy constructor.\n";
+		delete[] sudoku;
+		sudoku = nullptr;
+		std::cout << "Error in copy constructor, step 1 " << std::endl;
+		return;
+	}
+	for (int i = 0; i < size; i++) {
+		try {
+			sudoku[i] = new int[size];
+		}
+		catch (std::exception e) {
+			for (int j = 0; j <= i; j++) {
+				delete[] sudoku[j];
+				sudoku[j] = nullptr;
+
+			}
+			std::cout << "Error in copy constructor, step 2, loop " << i << std::endl;
+			delete[] sudoku;
+			sudoku = nullptr;
+
+			return;
+		}
+		for (int j = 0; j < size; j++) {
+			sudoku[i][j] = b.sudoku[i][j];
+		}
 	}
 	
 }
@@ -106,53 +138,64 @@ Matrix::Matrix(std::string filename)
 {
 	std::ifstream myfile;
 	try {
-		for (int i = 0; i < size; i++) {
-			
-			if (sudoku[i] != nullptr) {
-				delete[] sudoku[i];
-				sudoku[i] = nullptr;
-			}
-		}
-		if (sudoku != nullptr) {
-			delete[] sudoku;
-			sudoku = nullptr;
-		}
 		myfile.open(filename);
-		std::string line;
-		int file_indicated_size = -1;
-		int row = 0;
-		if (myfile.is_open()) {
-			while (std::getline(myfile, line)) {
-				if (file_indicated_size == -1) {
-					file_indicated_size = atoi(line.c_str());
-					size = file_indicated_size;
-					
-					sudoku = new int*[size];
-					for (int i = 0; i < size; i++) {
-						sudoku[i] = new int[size];
-						for (int j = 0; j < size; j++) {
-							sudoku[i][j] = 0;
-						}
-					}
-				}
-				else {
-					for (int col = 0; col < size; col++) {
-						int num = line[col] - '0';
-						sudoku[row][col] = num;
-
-					}
-					row++;
-				}
-			}
-			myfile.close();
-		}
-		else {
-			std::cout << "unable" << std::endl;
-		}
 	}
 	catch (std::exception e) {
-		std::cout << "Error when reading matrix from file.\n";
+		std::cout << "Error in file reading." << std::endl;
 	}
+	std::string line;
+	int file_indicated_size = -1;
+	int row = 0;
+	if (myfile.is_open()) {
+		while (std::getline(myfile, line)) {
+			if (file_indicated_size == -1) {
+				file_indicated_size = atoi(line.c_str());
+				size = file_indicated_size;
+				try {
+					sudoku = new int*[size];
+				}
+				catch (std::exception e) {
+					delete[] sudoku;
+					sudoku = nullptr;
+					std::cout << "Error in string constructor, step 1 " << std::endl;
+					return;
+				}
+				for (int i = 0; i < size; i++) {
+					try {
+						sudoku[i] = new int[size];
+					}
+					catch (std::exception e) {
+						for (int j = 0; j <= i; j++) {
+							delete[] sudoku[j];
+							sudoku[j] = nullptr;
+
+						}
+						std::cout << "Error in copy constructor, step 2, loop " << i << std::endl;
+						delete[] sudoku;
+						sudoku = nullptr;
+						return;
+					}
+					for (int j = 0; j < size; j++) {
+						sudoku[i][j] = 0;
+					}
+				}
+			}
+			else {
+				for (int col = 0; col < size; col++) {
+					int num = line[col] - '0';
+					sudoku[row][col] = num;
+
+				}
+				row++;
+			}
+		}
+		myfile.close();
+	}
+	else {
+		std::cout << "unable" << std::endl;
+	}
+	
+
 }
 
 bool Matrix::is_complete() const {

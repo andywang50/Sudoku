@@ -35,7 +35,7 @@ public:
 
 	std::vector<Entry> get_square(Entry coord)const;
 
-	std::vector<int> default_feasible_values() const;
+	//std::vector<int> default_feasible_values() const;
 
 	std::vector<int> get_feasbile_values(Entry e) const;
 
