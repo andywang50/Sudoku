@@ -76,6 +76,7 @@ public:
 	int& operator ()(Entry coord) { return sudoku[coord.row_coord][coord.col_coord]; }
 	int operator ()(Entry coord) const { return sudoku[coord.row_coord][coord.col_coord]; }
 
+    int get_size() const;
 
 private:
 	int** sudoku = nullptr;

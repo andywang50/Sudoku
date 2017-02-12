@@ -143,7 +143,7 @@ trying (1, 6) with 7
                                                                           trying (6, 4) with 2
                                                                             trying (0, 2) with 7
                                                                               trying (7, 4) with 1
-                                                                                trying (1, 5) with 1
+                                                                                trying (d) with 1
                                                                                   trying (2, 3) with 4
                                                                                     trying (8, 3) with 9
                                                                                       trying (0, 5) with 9

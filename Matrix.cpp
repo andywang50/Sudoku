@@ -1,6 +1,8 @@
 #include "Matrix.h"
 
-
+int Matrix::get_size() const{
+    return this->size;
+}
 std::ostream & operator<<(std::ostream & os, const Entry & e)
 {
 	os << e.toString();

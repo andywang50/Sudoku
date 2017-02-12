@@ -24,8 +24,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    ../Dictionary.cpp \
+    ../Matrix.cpp \
+    ../Sudoku_Generator.cpp \
+    ../Sudoku_Solver.cpp \
+    board.cpp
 
-HEADERS  += mainwindow.h
+
+HEADERS  += mainwindow.h \
+    ../Dictionary.h \
+    ../Matrix.h \
+    ../Node.h \
+    ../Stack.h \
+    ../Sudoku_Generator.h \
+    ../Sudoku_Solver.h \
+    board.h
+
 
 FORMS    += mainwindow.ui
+
+DISTFILES += \
+    sudokutest.txt
