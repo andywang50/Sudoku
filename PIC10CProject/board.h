@@ -23,6 +23,8 @@ public:
 
     Matrix get_matrix() const {return displaying_matrix;}
 
+    Matrix get_solution_matrix() const {return solution_matrix;}
+
     void set_style(QLineEdit* edit_ptr, bool read_only, int row, int col);
 
     bool check_answer() const;

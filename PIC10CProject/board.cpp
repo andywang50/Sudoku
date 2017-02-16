@@ -5,8 +5,10 @@ board::board(QWidget *parent):QWidget(parent){
     size = 0;
     displaying_matrix = Matrix();
     table = std::vector<std::vector<QLineEdit*>>();
-    board_layout = nullptr;
-
+    //board_layout = nullptr;
+    board_layout = new QGridLayout();
+    board_layout->setSpacing(10);
+    this->setLayout(board_layout);
 }
 
 
@@ -79,8 +81,7 @@ void board::set_style(QLineEdit* edit_ptr, bool read_only, int row, int col){
 }
 
 void board::display(){
-    board_layout = new QGridLayout();
-    board_layout->setSpacing(10);
+
     for (int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
                 //int value = 1;
@@ -108,6 +109,6 @@ void board::display(){
 
         }
     }
-    this->setLayout(board_layout);
+
 
 }
