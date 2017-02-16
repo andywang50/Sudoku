@@ -75,6 +75,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //this->setFixedSize(1200,1000);
 }
 
+
+
  void MainWindow::check_answer(){
     bool correct = my_board->check_answer();
     if(correct){
@@ -85,11 +87,12 @@ MainWindow::MainWindow(QWidget *parent) :
     }
  }
 
+
+
  void MainWindow::start_newgame(){
      Sudoku_Generator generator = Sudoku_Generator(9);
      Matrix sudoku = generator.generate();
      original_matrix = sudoku;
-     std::cout<<original_matrix<<std::endl;
 
      my_board->set_matrix(sudoku);
      my_board->display();
@@ -103,7 +106,6 @@ MainWindow::MainWindow(QWidget *parent) :
     Matrix solution_matrix = my_board->get_solution_matrix();
     my_board->set_matrix(solution_matrix);
     my_board->display();
-    std::cout<<original_matrix<<std::endl;
 
  }
 

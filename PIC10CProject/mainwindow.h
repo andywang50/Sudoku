@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include "board.h"
+#include <QTimer>
 namespace Ui {
 class MainWindow;
 }
@@ -22,6 +23,7 @@ private slots:
     void start_newgame();
     void solve_for_me();
     void restart();
+
 private:
     Ui::MainWindow *ui;
 
@@ -35,6 +37,7 @@ private:
     QPushButton* quit_button;
     QPushButton* solve_button;
     QPushButton* restart_button;
+
 };
 
 #endif // MAINWINDOW_H

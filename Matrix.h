@@ -44,6 +44,9 @@ public:
 	friend std::ostream& operator << (std::ostream& os, const Entry& e);
 	bool operator == (const Entry& b) const { return row_coord == b.row_coord && col_coord == b.col_coord; }
 	bool operator != (const Entry& b) const { return !(*this == b); }
+
+    int get_row() const{return row_coord;}
+    int get_col() const{return col_coord;}
 private:
 	int row_coord;
 	int col_coord;

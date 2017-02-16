@@ -9,6 +9,8 @@ board::board(QWidget *parent):QWidget(parent){
     board_layout = new QGridLayout();
     board_layout->setSpacing(10);
     this->setLayout(board_layout);
+    warning_hint_timer = new QTimer(this);
+    connect(warning_hint_timer,SIGNAL(timeout()),this,SLOT(recover_from_warning()));
 }
 
 
@@ -32,7 +34,6 @@ void board::set_matrix(const Matrix& matrix){
             temp_vector.push_back(temp);
 
             connect(temp,SIGNAL(textEdited(QString)),this,SLOT(slotValueChanged(QString)));
-
         }
         table.push_back(temp_vector);
 
@@ -49,8 +50,109 @@ void board::slotValueChanged(QString testString){
         }
     }
 
+    //int violating_count = 0;
+
+    std::unordered_map<int,bool> violating_entries = std::unordered_map<int,bool>();
+    Sudoku_Solver temp_solver = Sudoku_Solver(displaying_matrix);
+    for (int i = 0; i < size; i++){
+        for (int j = 0; j<size; j++){
+            Entry current_entry = Entry(i,j);
+            bool read_only_current = table[i][j]->isReadOnly();
+            int current_key = i*size+j;
+
+            int current_num = displaying_matrix(current_entry);
+            if (current_num == 0) continue;
+            std::vector<Entry> neighbors = temp_solver.get_row(current_entry);
+
+            for (Entry temp_entry:neighbors){
+                 if (temp_entry == current_entry) continue;
+                 int temp_num = displaying_matrix(temp_entry);
+                 if(temp_num ==0 || temp_num != current_num) continue;
+                 int row = temp_entry.get_row();
+                 int col = temp_entry.get_col();
+                 bool read_only_temp = table[row][col]->isReadOnly();
+                 violating_entries.insert ({row*size+col,read_only_temp});
+                 violating_entries.insert ({current_key,read_only_current});
+
+            }
+            neighbors = temp_solver.get_col(current_entry);
+
+            for (Entry temp_entry:neighbors){
+                if (temp_entry == current_entry) continue;
+                int temp_num = displaying_matrix(temp_entry);
+                if(temp_num ==0 || temp_num != current_num) continue;
+                int row = temp_entry.get_row();
+                int col = temp_entry.get_col();
+                bool read_only_temp = table[row][col]->isReadOnly();
+                violating_entries.insert ({row*size+col,read_only_temp});
+                violating_entries.insert ({current_key,read_only_current});
+
+            }
+            neighbors = temp_solver.get_square(current_entry);
+            for (Entry temp_entry:neighbors){
+                if (temp_entry == current_entry) continue;
+                int temp_num = displaying_matrix(temp_entry);
+                if(temp_num ==0 || temp_num != current_num) continue;
+                int row = temp_entry.get_row();
+                int col = temp_entry.get_col();
+                bool read_only_temp = table[row][col]->isReadOnly();
+                violating_entries.insert ({row*size+col,read_only_temp});
+                violating_entries.insert ({current_key,read_only_current});
+
+            }
+
+        }
+    }
+    //violating_count = violating_entries.size();
+
+    //std::cout<<violating_count << std::endl;
+    for (auto pair:violating_entries){
+        int key = pair.first;
+        int row = key/size;
+        int col = key%size;
+        QLineEdit* temp = table[row][col];
+        bool read_only =temp->isReadOnly();
+        set_warning_style(temp,read_only);
+    }
+    warning_hint_timer->start(500);
+
 }
 
+void board::set_warning_style(QLineEdit *edit_ptr, bool read_only){
+
+    if (read_only){
+
+        edit_ptr->setStyleSheet(read_only_warning_style);
+
+    }
+    else{
+        edit_ptr->setStyleSheet(editable_warning_style);
+
+    }
+}
+void board::recover_from_warning(){
+    warning_hint_timer->stop();
+    for(int row = 0; row <size; row++){
+        for (int col = 0; col<size; col++){
+            QLineEdit* edit_ptr = table[row][col];
+            bool read_only = edit_ptr->isReadOnly();
+            int sqr_size = sqrt(size);
+            bool flag = ((row/sqr_size*sqr_size+col/sqr_size) % 2) == 1;
+
+            if (read_only){
+                if (flag)  edit_ptr->setStyleSheet("font-size: 20pt; font-weight: bold; color: #0061ff; background: rgb(206, 255, 217);");
+
+                else edit_ptr->setStyleSheet("font-size: 20pt; font-weight: bold; color: #0061ff; ");
+
+            }
+            else{
+                if (flag) edit_ptr->setStyleSheet("font-size: 20pt; font-weight: bold; color: #87f1ff; background:  rgb(206, 255, 217);");
+                else edit_ptr->setStyleSheet("font-size: 20pt; font-weight: bold; color: #87f1ff;");
+            }
+
+        }
+    }
+}
 
 bool board::check_answer() const{
     for (int i = 0; i < size; i++){
@@ -71,6 +173,7 @@ void board::set_style(QLineEdit* edit_ptr, bool read_only, int row, int col){
 
     if (read_only){
         if (flag)  edit_ptr->setStyleSheet("font-size: 20pt; font-weight: bold; color: #0061ff; background: rgb(206, 255, 217);");
+
         else edit_ptr->setStyleSheet("font-size: 20pt; font-weight: bold; color: #0061ff; ");
 
     }
