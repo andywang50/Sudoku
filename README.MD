@@ -4,6 +4,7 @@ Author: Guoan Wang
 
 **IMPORTANT: Using RELEASE mode to run the program is STRONGLY RECOMMENDED. Since using backtracking to generate a sudoku game takes time. (NP-Complete.)
 **
+
 		If you use DEBUG mode instead, it might take 5 seconds or more to generate a new sudoku problem. 
 
 Brief Introduction:
