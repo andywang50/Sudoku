@@ -38,6 +38,11 @@ private:
     QPushButton* solve_button;
     QPushButton* restart_button;
 
+    const QString bg_Style = QString::fromStdString(" background:  rgb(70, 72, 76);"); //font-size: 20pt; font-weight: bold; color: #87f1ff;
+    const QString button_Style = QString::fromStdString("font-size: 20pt; font-weight: bold; color: #ffffff; background:  rgb(90, 92, 96);");
+    const QString label_Style = QString::fromStdString("font-size: 13pt; font-weight: bold; color: #ffffff;");
+
+
 };
 
 #endif // MAINWINDOW_H

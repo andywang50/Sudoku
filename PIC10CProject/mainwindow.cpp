@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    this->setWindowTitle("Sudoku Game");
+    this->setStyleSheet(this->bg_Style);
     QHBoxLayout* main_layout = new QHBoxLayout();
     srand(unsigned(std::time(0)));
 
@@ -27,19 +29,25 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     newgame_button = new QPushButton("Start");
+    newgame_button->setStyleSheet(this->button_Style);
 
     quit_button = new QPushButton("Quit");
+    quit_button->setStyleSheet(this->button_Style);
 
     check_button = new QPushButton("Check");
     check_button->setEnabled(false);
+    check_button->setStyleSheet(this->button_Style);
 
     solve_button = new QPushButton("Solve");
     solve_button->setEnabled(false);
+    solve_button->setStyleSheet(this->button_Style);
 
     restart_button = new QPushButton("Restart");
     restart_button->setEnabled(false);
+    restart_button->setStyleSheet(this->button_Style);
 
     correctness_label = new QLabel("");
+    correctness_label->setStyleSheet(this->label_Style);
 
     connect(check_button,SIGNAL(clicked(bool)), this, SLOT(check_answer()));
 

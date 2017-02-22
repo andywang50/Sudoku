@@ -5,8 +5,8 @@
 
 class Sudoku_Generator {
 public:
-	double FRACT_OF_ENTRIES_NEEDED_TO_BE_REMOVED_LOWER_THRESHOLD =0.1; //can stop removing entries only if more than x entries has already be removed.
-	double FRACT_OF_ENTRIES_NEEDED_TO_BE_REMOVED_UPPER_THRESHOLD = 0.3; //must stop removing entries if more than x entries has already be removed.
+    double FRACT_OF_ENTRIES_NEEDED_TO_BE_REMOVED_LOWER_THRESHOLD =0.2; //can stop removing entries only if more than x entries has already be removed.
+    double FRACT_OF_ENTRIES_NEEDED_TO_BE_REMOVED_UPPER_THRESHOLD = 0.5; //must stop removing entries if more than x entries has already be removed.
 	int NUMBER_OF_ENTRIES_FAILED_TO_REMOVE_THRESHOLD =3; // can stop removing entries only if we've failed to remove y entries or more.
 	int NUMBER_OF_ENTRIES_FAILED_TO_REMOVE_CONSECUTIVELY_THRESHOLD = 2;
 	Sudoku_Generator();

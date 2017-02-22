@@ -41,7 +41,6 @@ void board::set_matrix(const Matrix& matrix){
 }
 
 void board::slotValueChanged(QString testString){
-
     for (int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
             QString input_qstr = table[i][j]->text();
@@ -140,14 +139,14 @@ void board::recover_from_warning(){
             bool flag = ((row/sqr_size*sqr_size+col/sqr_size) % 2) == 1;
 
             if (read_only){
-                if (flag)  edit_ptr->setStyleSheet("font-size: 20pt; font-weight: bold; color: #0061ff; background: rgb(206, 255, 217);");
+                if (flag)  edit_ptr->setStyleSheet(this->read_only_style1);
 
-                else edit_ptr->setStyleSheet("font-size: 20pt; font-weight: bold; color: #0061ff; ");
+                else edit_ptr->setStyleSheet(this->read_only_style2);
 
             }
             else{
-                if (flag) edit_ptr->setStyleSheet("font-size: 20pt; font-weight: bold; color: #87f1ff; background:  rgb(206, 255, 217);");
-                else edit_ptr->setStyleSheet("font-size: 20pt; font-weight: bold; color: #87f1ff;");
+                if (flag) edit_ptr->setStyleSheet(this->editable_style1);
+                else edit_ptr->setStyleSheet(this->editable_style2);
             }
 
         }
@@ -172,15 +171,16 @@ void board::set_style(QLineEdit* edit_ptr, bool read_only, int row, int col){
     bool flag = ((row/sqr_size*sqr_size+col/sqr_size) % 2) == 1;
 
     if (read_only){
-        if (flag)  edit_ptr->setStyleSheet("font-size: 20pt; font-weight: bold; color: #0061ff; background: rgb(206, 255, 217);");
+        if (flag)  edit_ptr->setStyleSheet(this->read_only_style1);
 
-        else edit_ptr->setStyleSheet("font-size: 20pt; font-weight: bold; color: #0061ff; ");
+        else edit_ptr->setStyleSheet(this->read_only_style2);
 
     }
     else{
-        if (flag) edit_ptr->setStyleSheet("font-size: 20pt; font-weight: bold; color: #87f1ff; background:  rgb(206, 255, 217);");
-        else edit_ptr->setStyleSheet("font-size: 20pt; font-weight: bold; color: #87f1ff;");
+        if (flag) edit_ptr->setStyleSheet(this->editable_style1);
+        else edit_ptr->setStyleSheet(this->editable_style2);
     }
+
 }
 
 void board::display(){
