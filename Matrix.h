@@ -9,6 +9,7 @@
 #include <ctime>        // std::time
 #include <cstdlib> 
 #include <algorithm>
+
 class Matrix;
 class Entry {
 public:
@@ -82,7 +83,7 @@ public:
     int get_size() const;
 
 private:
-	int** sudoku = nullptr;
+    int** sudoku = nullptr;
 	int size = 0;
 	void swap(Matrix& b) {
 		std::swap(size, b.size);

@@ -50,10 +50,10 @@ Matrix::Matrix(int N) {
 	}
 	size = N;
 	try {
-		sudoku = new int*[size];
+        sudoku = new int*[size];
 	}
 	catch (std::exception e) {
-		delete[] sudoku;
+        delete[] sudoku;
 		sudoku = nullptr;
 		std::cout << "Error in constructor, step 1 " << std::endl;
 		return;
