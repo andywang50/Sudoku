@@ -20,14 +20,9 @@ The sudoku part is in the root directory. Needed files are:
 	5. Sudoku_Generator.h, Sudoku_Generator.cpp
 	6. Sudoku_Solver.h, Sudoku_Solver.cpp
 	
-	Not needed:
-	
-	1.main.cpp -- This is just a test program to see whether the generator and solver class work as expected.
-	2.other txt files -- just for myself testing whether the code works. 
-	
 The GUI part is in the PIC10CPorject folder. Needed files are:
 
-	1. PIC10CPorject/main.cpp  IMPORTANT: Use your QT to start from this main.cpp rather than the main.cpp in the root directory!
+	1. PIC10CPorject/main.cpp  IMPORTANT: Use your QT to start from this main.cpp.
 	2. PIC10CPorject/board.h, board.cpp
 	3. PIC10CPorject/mainwindow.h, mainwindow.cpp
 	4. PIC10CPorject/mainwindow.ui
