@@ -199,6 +199,7 @@ MainWindow::MainWindow(QWidget *parent) :
      empty_button->setEnabled(true);
 
      Entry next_to_update = Entry(-1,-1);
+     correctness_label->setText("");
 
  }
 
@@ -207,6 +208,7 @@ MainWindow::MainWindow(QWidget *parent) :
     my_board->set_matrix(solution_matrix);
     my_board->display();
 
+    correctness_label->setText("Correct!");
  }
 
  void MainWindow::empty(){
@@ -223,6 +225,9 @@ MainWindow::MainWindow(QWidget *parent) :
      my_board->display();
      Entry next_to_update = Entry(-1,-1);
 
+     correctness_label->setText("");
+
+
  }
 
  void MainWindow::restart(){
@@ -234,6 +239,9 @@ MainWindow::MainWindow(QWidget *parent) :
      solve_button->setEnabled(true);
      restart_button->setEnabled(true);
      hint_button->setEnabled(true);
+
+     correctness_label->setText("");
+
  }
 
 MainWindow::~MainWindow()
