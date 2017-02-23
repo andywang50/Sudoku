@@ -106,7 +106,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
  void MainWindow::hint(){
     bool any_incorrect_so_far = false;
-
+    std::vector<Entry> incorrect_entries = std::vector<Entry>();
     Matrix displaying_matrix = my_board->get_matrix();
     Matrix solution_matrix = my_board->get_solution_matrix();
     for (int i = 0; i < my_board->get_size(); i++){
@@ -117,15 +117,20 @@ MainWindow::MainWindow(QWidget *parent) :
                 any_incorrect_so_far = true;
                 incorrect_row = i;
                 incorrect_column = j;
-                break;
+                incorrect_entries.push_back(Entry(i,j));
+                //break;
             }
         }
-        if (any_incorrect_so_far) break;
+        //if (any_incorrect_so_far) break;
     }
 
-    if (incorrect_row != -1 && incorrect_column != -1){
-
-        my_board->set_warning_style(my_board->get_table()[incorrect_row][incorrect_column],false);
+    //if (incorrect_row != -1 && incorrect_column != -1){
+    if (incorrect_entries.size()>0){
+        for (Entry e:incorrect_entries){
+            incorrect_row = e.get_row();
+            incorrect_column = e.get_col();
+            my_board->set_warning_style(my_board->get_table()[incorrect_row][incorrect_column],false);
+        }
         my_board->emit invokeSlotValueChanged();
         //incorrect_hint_timer->start(500);
         hint_incorrect_recover();

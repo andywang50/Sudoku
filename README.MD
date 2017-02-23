@@ -5,11 +5,34 @@ Author: Guoan Wang
 **IMPORTANT: Using RELEASE mode to run the program is STRONGLY RECOMMENDED. Since using backtracking to generate a sudoku game takes time. (NP-Complete.)
 **
 
-		If you use DEBUG mode instead, it might take 5 seconds or more to generate a new sudoku problem. 
+		If you use DEBUG mode instead, it might take (more than) 5 seconds or more to generate a new sudoku problem. 
 
 Brief Introduction:
 
 This is a (9*9) sudoku game with a Graphic User Interface (GUI). The program is coded in C++ (sudoku part) and Qt (GUI part). 
+
+The sudoku part is in the root directory. Needed files are:
+
+	1. Dictionary.h, Dictionary.cpp.
+	2. Matrix.h, Matrix.cpp.
+	3. Node.h
+	4. Stack.h
+	5. Sudoku_Generator.h, Sudoku_Generator.cpp
+	6. Sudoku_Solver.h, Sudoku_Solver.cpp
+	
+	Not needed:
+	
+	1.main.cpp -- This is just a test program to see whether the generator and solver class work as expected.
+	2.other txt files -- just for myself testing whether the code works. 
+	
+The GUI part is in the PIC10CPorject folder. Needed files are:
+
+	1. PIC10CPorject/main.cpp  IMPORTANT: Use your QT to start from this main.cpp rather than the main.cpp in the root directory!
+	2. PIC10CPorject/board.h, board.cpp
+	3. PIC10CPorject/mainwindow.h, mainwindow.cpp
+	4. PIC10CPorject/mainwindow.ui
+	5. PIC10CPorject/PIC10CProject.pro
+	6. PIC10CPorject/PIC10CProject.pro.user
 
 I will introduce two parts respectively:
 
@@ -59,6 +82,11 @@ GUI part: (Qt)
 			4. Quit. Quit the game.
 
 			5. Solve. Display the answer of this game.
+			
+			6. Hint. Compare the contemporary matrix with the solution matrix, two cases:
+				a) By so far, if all the non-empty entries are the same as the solution matrix. Give a hint for the next step: Insert an empty entry with the correct value
+				
+				b) By so far, if there are any entered values that are different from the solution. Highlight these wrong entries (warning), and highlight violations (row, column, square containing same values).
 
 		3. board.h + board.cpp. A widget that has 9*9 QLineEdit objects for user to enter.
 
