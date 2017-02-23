@@ -23,6 +23,11 @@ private slots:
     void start_newgame();
     void solve_for_me();
     void restart();
+    void hint();
+    void empty();
+
+    void hint_incorrect_recover();
+    void hint_nextstep_recover();
 
 private:
     Ui::MainWindow *ui;
@@ -37,11 +42,24 @@ private:
     QPushButton* quit_button;
     QPushButton* solve_button;
     QPushButton* restart_button;
+    QPushButton* hint_button;
+    QPushButton* empty_button;
 
-    const QString bg_Style = QString::fromStdString(" background:  rgb(70, 72, 76);"); //font-size: 20pt; font-weight: bold; color: #87f1ff;
-    const QString button_Style = QString::fromStdString("font-size: 20pt; font-weight: bold; color: #ffffff; background:  rgb(90, 92, 96);");
+
+    const QString bg_Style = QString::fromStdString("font-family:  Georgia, Serif; background:  rgb(70, 72, 76);"); //font-size: 20pt; font-weight: bold; color: #87f1ff;
+    const QString button_Style = QString::fromStdString(":enabled{font-size: 20pt; font-weight: bold; color: #ffffff; background:  rgb(90, 92, 96);} "
+                                                        ":disabled{font-size: 20pt; font-weight: bold; color: #424344; background:  rgb(90, 92, 96);}");
     const QString label_Style = QString::fromStdString("font-size: 13pt; font-weight: bold; color: #ffffff;");
 
+    Entry next_to_update = Entry(-1,-1);
+
+    int incorrect_row = -1;
+    int incorrect_column = -1;
+
+    //QTimer* incorrect_hint_timer;
+    //QTimer* nextstep_hint_timer;
+
+    const QString hint_style = QString::fromStdString("font-size: 20pt; font-weight: bold; color: #4066e5; background:  rgb(255, 233, 0);");
 
 };
 

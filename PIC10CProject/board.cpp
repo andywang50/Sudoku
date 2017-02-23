@@ -2,6 +2,7 @@
 
 board::board(QWidget *parent):QWidget(parent){
 
+    connect(this,SIGNAL(invokeSlotValueChanged()),this,SLOT(slotValueChanged()));
     size = 0;
     displaying_matrix = Matrix();
     table = std::vector<std::vector<QLineEdit*>>();
@@ -33,14 +34,14 @@ void board::set_matrix(const Matrix& matrix){
             temp->setAlignment(Qt::AlignCenter);
             temp_vector.push_back(temp);
 
-            connect(temp,SIGNAL(textEdited(QString)),this,SLOT(slotValueChanged(QString)));
+            connect(temp,SIGNAL(textEdited(QString)),this,SLOT(slotValueChanged()));
         }
         table.push_back(temp_vector);
 
     }
 }
 
-void board::slotValueChanged(QString testString){
+void board::slotValueChanged(){
     for (int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
             QString input_qstr = table[i][j]->text();

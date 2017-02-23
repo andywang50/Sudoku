@@ -17,7 +17,7 @@ class board: public QWidget{
     Q_OBJECT
 public:
 
-    friend class mainwindow;
+    friend class Mainwindow;
 
     board(QWidget *parent = 0);
 
@@ -35,8 +35,21 @@ public:
 
     void set_warning_style(QLineEdit* edit_ptr, bool read_only);
 
+    int get_size(){return size;}
+
+    std::vector<std::vector<QLineEdit*>>& get_table(){return table;}
+
+    QTimer* get_warning_hint_timer() {return warning_hint_timer;}
+
+    void set_matrix_value(Entry entry_to_be_modified, int answer){
+        displaying_matrix(entry_to_be_modified) = answer;
+    }
+
+signals:
+    void invokeSlotValueChanged();
+
 private slots:
-    void slotValueChanged(QString);
+    void slotValueChanged();
     void recover_from_warning();
 
 private:
@@ -47,8 +60,8 @@ private:
 
     Matrix solution_matrix;
     QTimer* warning_hint_timer;
-    const QString editable_style1 = QString::fromStdString("font-size: 20pt; font-weight: bold; color: #4066e5; background:  rgb(113, 186, 170);");
-    const QString editable_style2 = QString::fromStdString("font-size: 20pt; font-weight: bold; color: #4066e5;");
+    const QString editable_style1 = QString::fromStdString("font-size: 20pt; font-weight: bold; color: #006aff; background:  rgb(113, 186, 170);");
+    const QString editable_style2 = QString::fromStdString("font-size: 20pt; font-weight: bold; color: #006aff;");
     const QString read_only_style1 = QString::fromStdString("font-size: 20pt; font-weight: bold; color: #ffffff; background: rgb(113, 186, 170);");
     const QString read_only_style2 = QString::fromStdString("font-size: 20pt; font-weight: bold; color: #ffffff; ");
     const QString editable_warning_style = QString::fromStdString("font-size: 20pt; font-weight: bold; color: #4066e5; background: rgb(255, 0, 0);");
