@@ -34,6 +34,12 @@ MainWindow::MainWindow(QWidget *parent) :
     //nextstep_hint_timer = new QTimer(this);
     //connect(nextstep_hint_timer, SIGNAL(timeout()), this, SLOT(hint_nextstep_recover()));
 
+    title_label = new QLabel("SUDOKU!");
+    title_label->setStyleSheet(this->title_Style);
+    title_label->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
+    title_label->adjustSize();
+    title_label->setFixedHeight(70);
+
     newgame_button = new QPushButton("Start");
     newgame_button->setStyleSheet(this->button_Style);
 
@@ -77,6 +83,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(empty_button,SIGNAL(clicked(bool)), this, SLOT(empty()));
 
+    control_Widget_Layout->addWidget(title_label);
+
     control_Widget_Layout->addWidget(newgame_button);
 
     control_Widget_Layout->addWidget(empty_button);
@@ -100,6 +108,8 @@ MainWindow::MainWindow(QWidget *parent) :
     this->centralWidget()->setLayout(main_layout);
 
     this->resize(1200,1000);
+
+
 
     //this->setFixedSize(1200,1000);
 }

@@ -95,3 +95,4 @@ GUI part: (Qt)
 
 
 Enjoy!
+P.S. the sudoku part is coded in Visual Studio 2015. The GUI part is coded in Qt Creator 4.2.1 (Community). I am pretty sure the whole program compiles and runs well on UCLA picLab's Qt Creator (if the directory is in disk C:\).
