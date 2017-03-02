@@ -5,7 +5,7 @@ board::board(QWidget *parent):QWidget(parent){
     connect(this,SIGNAL(invokeSlotValueChanged()),this,SLOT(slotValueChanged()));
     size = 0;
     displaying_matrix = Matrix();
-    table = std::vector<std::vector<QLineEdit*>>();
+    table = std::vector<std::vector<myLineEdit*>>();
     //board_layout = nullptr;
     board_layout = new QGridLayout();
     board_layout->setSpacing(10);
@@ -21,11 +21,11 @@ void board::set_matrix(const Matrix& matrix){
     Sudoku_Solver solver1 = Sudoku_Solver(matrix);
     solver1.solve();
     solution_matrix = solver1.get_matrix();
-    table = std::vector<std::vector<QLineEdit*>>();
+    table = std::vector<std::vector<myLineEdit*>>();
     for (int i = 0; i < size; i++){
-        std::vector<QLineEdit*> temp_vector = std::vector<QLineEdit*>();
+        std::vector<myLineEdit*> temp_vector = std::vector<myLineEdit*>();
         for (int j = 0; j < size; j++ ){
-            QLineEdit* temp = new QLineEdit(this);
+            myLineEdit* temp = new myLineEdit(this);
             QRegExp rx("[1-9]\\d{0,0}");
             QRegExpValidator *v = new QRegExpValidator(rx, this);
             temp->setValidator(v);
@@ -110,7 +110,7 @@ void board::slotValueChanged(){
         int key = pair.first;
         int row = key/size;
         int col = key%size;
-        QLineEdit* temp = table[row][col];
+        myLineEdit* temp = table[row][col];
         bool read_only =temp->isReadOnly();
         set_warning_style(temp,read_only);
     }
@@ -118,7 +118,7 @@ void board::slotValueChanged(){
 
 }
 
-void board::set_warning_style(QLineEdit *edit_ptr, bool read_only){
+void board::set_warning_style(myLineEdit *edit_ptr, bool read_only){
 
     if (read_only){
 
@@ -134,7 +134,7 @@ void board::recover_from_warning(){
     warning_hint_timer->stop();
     for(int row = 0; row <size; row++){
         for (int col = 0; col<size; col++){
-            QLineEdit* edit_ptr = table[row][col];
+            myLineEdit* edit_ptr = table[row][col];
             bool read_only = edit_ptr->isReadOnly();
             int sqr_size = sqrt(size);
             bool flag = ((row/sqr_size*sqr_size+col/sqr_size) % 2) == 1;
@@ -166,7 +166,7 @@ bool board::check_answer() const{
     return true;
 }
 
-void board::set_style(QLineEdit* edit_ptr, bool read_only, int row, int col){
+void board::set_style(myLineEdit* edit_ptr, bool read_only, int row, int col){
     edit_ptr->setReadOnly(read_only);
     int sqr_size = sqrt(size);
     bool flag = ((row/sqr_size*sqr_size+col/sqr_size) % 2) == 1;
@@ -191,7 +191,7 @@ void board::display(){
                 //int value = 1;
                 int value = displaying_matrix(i,j);
                 std::string str = "";
-                QLineEdit* lineedit_ptr = table[i][j];
+                myLineEdit* lineedit_ptr = table[i][j];
                 set_style(lineedit_ptr,true, i , j);
                 switch(value){
                     case 0: str = ""; set_style(lineedit_ptr,false,i ,j ); break;

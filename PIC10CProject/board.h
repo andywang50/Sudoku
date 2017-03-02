@@ -13,6 +13,17 @@
 #include <iostream>
 #include <QTimer>
 
+class myLineEdit:public QLineEdit{
+    Q_OBJECT
+public:
+    myLineEdit(QWidget *parent = 0):QLineEdit(parent){}
+    void myLineEdit::contextMenuEvent(QContextMenuEvent *event){
+        if (event) return;
+        return;
+    }
+
+};
+
 class board: public QWidget{
     Q_OBJECT
 public:
@@ -29,15 +40,15 @@ public:
 
     Matrix get_solution_matrix() const {return solution_matrix;}
 
-    void set_style(QLineEdit* edit_ptr, bool read_only, int row, int col);
+    void set_style(myLineEdit* edit_ptr, bool read_only, int row, int col);
 
     bool check_answer() const;
 
-    void set_warning_style(QLineEdit* edit_ptr, bool read_only);
+    void set_warning_style(myLineEdit* edit_ptr, bool read_only);
 
     int get_size(){return size;}
 
-    std::vector<std::vector<QLineEdit*>>& get_table(){return table;}
+    std::vector<std::vector<myLineEdit*>>& get_table(){return table;}
 
     QTimer* get_warning_hint_timer() {return warning_hint_timer;}
 
@@ -55,7 +66,7 @@ private slots:
 private:
     int size;
     Matrix displaying_matrix;
-    std::vector<std::vector<QLineEdit*>>table = std::vector<std::vector<QLineEdit*>>();
+    std::vector<std::vector<myLineEdit*>>table = std::vector<std::vector<myLineEdit*>>();
     QGridLayout* board_layout = nullptr;
 
     Matrix solution_matrix;

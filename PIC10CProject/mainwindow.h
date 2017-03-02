@@ -46,7 +46,7 @@ private:
     QPushButton* hint_button;
     QPushButton* empty_button;
 
-    const QString title_Style = QString::fromStdString("font-size: 13pt; font-weight: bold; color: #ffffff; "); //font-size: 20pt; font-weight: bold; color: #87f1ff;
+    const QString title_Style = QString::fromStdString("font-size: 20pt; font-weight: bold; color: #88aaff; "); //font-size: 20pt; font-weight: bold; color: #87f1ff;
 
     const QString bg_Style = QString::fromStdString("font-family:  Georgia, Serif; background:  rgb(70, 72, 76);"); //font-size: 20pt; font-weight: bold; color: #87f1ff;
     const QString button_Style = QString::fromStdString(":enabled{font-size: 20pt; font-weight: bold; color: #ffffff; background:  rgb(90, 92, 96);} "
