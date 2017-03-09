@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include "board.h"
 #include <QTimer>
+#include <QTime>
 namespace Ui {
 class MainWindow;
 }
@@ -29,7 +30,20 @@ private slots:
     void hint_incorrect_recover();
     void hint_nextstep_recover();
 
+    void updateDisplay() {
+         int secs = time.elapsed() / 1000;
+         int mins = (secs / 60) % 60;
+         int hours = (secs / 3600);
+         secs = secs % 60;
+         timeLabel->setText(QString("%1:%2:%3")
+                             .arg(hours, 2, 10, QLatin1Char('0'))
+                             .arg(mins, 2, 10, QLatin1Char('0'))
+                             .arg(secs, 2, 10, QLatin1Char('0')) );
+     }
+
 private:
+
+
     Ui::MainWindow *ui;
 
     board* my_board;
@@ -45,6 +59,10 @@ private:
     QPushButton* restart_button;
     QPushButton* hint_button;
     QPushButton* empty_button;
+
+    QLabel *timeLabel;
+    QTime time;
+    QTimer timer;
 
     const QString title_Style = QString::fromStdString("font-size: 20pt; font-weight: bold; color: #88aaff; "); //font-size: 20pt; font-weight: bold; color: #87f1ff;
 

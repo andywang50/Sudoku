@@ -83,6 +83,8 @@ GUI part: (Qt)
 				
 				b) By so far, if there are any entered values that are different from the solution. Highlight these wrong entries (warning), and highlight violations (row, column, square containing same values).
 
+			7. Timer. Displays the time elapsed for this game. (Will set to 00:00:00 if the user starts,restarts,or empties the game; will stop if the user solves the sudoku correctly.)	
+				
 		3. board.h + board.cpp. A widget that has 9*9 QLineEdit objects for user to enter.
 
 			Functionality: 

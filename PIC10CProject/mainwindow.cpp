@@ -66,8 +66,16 @@ MainWindow::MainWindow(QWidget *parent) :
     hint_button->setEnabled(false);
     hint_button->setStyleSheet(this->button_Style);
 
+    timeLabel = new QLabel();
+    timeLabel->setStyleSheet(this->label_Style);
+    timeLabel->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
+    timeLabel->adjustSize();
+    timeLabel->setFixedHeight(70);
+
     correctness_label = new QLabel("");
     correctness_label->setStyleSheet(this->label_Style);
+
+
 
     connect(check_button,SIGNAL(clicked(bool)), this, SLOT(check_answer()));
 
@@ -100,6 +108,8 @@ MainWindow::MainWindow(QWidget *parent) :
     control_Widget_Layout->addWidget(correctness_label);
 
     control_Widget_Layout->addWidget(quit_button);
+
+    control_Widget_Layout->addWidget(timeLabel);
 
     button_Widget->setLayout(control_Widget_Layout);
 
@@ -184,6 +194,8 @@ MainWindow::MainWindow(QWidget *parent) :
     bool correct = my_board->check_answer();
     if(correct){
         correctness_label->setText("Correct!");
+        timer.stop();
+        time.start();
     }
     else{
         correctness_label->setText("Incorrect!");
@@ -211,6 +223,10 @@ MainWindow::MainWindow(QWidget *parent) :
      Entry next_to_update = Entry(-1,-1);
      correctness_label->setText("");
 
+     time.start();
+     updateDisplay();
+     connect(&timer, SIGNAL(timeout()), this, SLOT(updateDisplay()));
+     timer.start(1000);
  }
 
  void MainWindow::solve_for_me(){
@@ -219,6 +235,9 @@ MainWindow::MainWindow(QWidget *parent) :
     my_board->display();
 
     correctness_label->setText("Correct!");
+    timer.stop();
+    time.start();
+
  }
 
  void MainWindow::empty(){
@@ -236,6 +255,9 @@ MainWindow::MainWindow(QWidget *parent) :
      Entry next_to_update = Entry(-1,-1);
 
      correctness_label->setText("");
+     timer.stop();
+     time.start();
+     timeLabel->setText("00:00:00");
 
 
  }
@@ -251,7 +273,10 @@ MainWindow::MainWindow(QWidget *parent) :
      hint_button->setEnabled(true);
 
      correctness_label->setText("");
-
+     time.start();
+     updateDisplay();
+     connect(&timer, SIGNAL(timeout()), this, SLOT(updateDisplay()));
+     timer.start(1000);
  }
 
 MainWindow::~MainWindow()
