@@ -64,6 +64,55 @@ private:
     QTime time;
     QTimer timer;
 
+    const QString menuBar_Style = QString::fromStdString("QMenuBar {\
+                                                         color:#aaaaaa;\
+                                                      }\
+                                                      QMenuBar::item {\
+                                                         color:#ffffff; \
+                                                          spacing: 3px; /* spacing between menu bar items */\
+                                                          padding: 1px 4px;\
+                                                          background: transparent;\
+                                                          border-radius: 4px;\
+                                                      }\
+                                                      QMenuBar::item:selected { /* when selected using mouse or keyboard */\
+                                                         background: #a8a8a8;\
+                                                      }\
+                                                      QMenuBar::item:pressed {\
+                                                         background: #888888;\
+                                                      }");
+    const QString menuMenu_Style = QString::fromStdString("QMenu {\
+                                                           margin: 2px; /* some spacing around the menu */\
+                                                      }\
+                                                      QMenu::item {\
+                                                          color:#ffffff;\
+                                                          padding: 2px 25px 2px 20px;\
+                                                          border: 1px solid transparent; /* reserve space for selection border */\
+                                                      }\
+                                                      QMenu::item:disabled {\
+                                                          color:#777777;\
+                                                          padding: 2px 25px 2px 20px;\
+                                                          border: 1px solid transparent; /* reserve space for selection border */\
+                                                      }\
+                                                      QMenu::item:selected {\
+                                                          border-color: darkblue;\
+                                                          background: rgba(100, 100, 100, 150);\
+                                                      }\
+                                                      QMenu::icon:checked { /* appearance of a 'checked' icon */\
+                                                          background: gray;\
+                                                          border: 1px inset gray;\
+                                                          position: absolute;\
+                                                          top: 1px;\
+                                                          right: 1px;\
+                                                          bottom: 1px;\
+                                                          left: 1px;\
+                                                      }\
+                                                      QMenu::separator {\
+                                                          height: 2px;\
+                                                          background: lightblue;\
+                                                          margin-left: 10px;\
+                                                          margin-right: 5px;\
+                                                      }\
+                                                     ");
     const QString title_Style = QString::fromStdString("font-size: 20pt; font-weight: bold; color: #88aaff; "); //font-size: 20pt; font-weight: bold; color: #87f1ff;
 
     const QString bg_Style = QString::fromStdString("font-family:  Georgia, Serif; background:  rgb(70, 72, 76);"); //font-size: 20pt; font-weight: bold; color: #87f1ff;

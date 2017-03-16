@@ -7,6 +7,15 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->menuBar->setStyleSheet(this->menuBar_Style);
+    ui->menuMenu->setStyleSheet(this->menuMenu_Style);
+
+    ui->actionClear->setEnabled(false);
+    ui->actionCheck->setEnabled(false);
+    ui->actionSolveForMe->setEnabled(false);
+    ui->actionRestart->setEnabled(false);
+
+
 
     this->setWindowTitle("Sudoku Game");
     this->setStyleSheet(this->bg_Style);
@@ -76,20 +85,24 @@ MainWindow::MainWindow(QWidget *parent) :
     correctness_label->setStyleSheet(this->label_Style);
 
 
-
     connect(check_button,SIGNAL(clicked(bool)), this, SLOT(check_answer()));
+    connect(ui->actionCheck,SIGNAL(triggered()),this,SLOT(check_answer()));
 
     connect(newgame_button,SIGNAL(clicked(bool)), this, SLOT(start_newgame()));
+    connect(ui->actionNewGame,SIGNAL(triggered()),this,SLOT(start_newgame()));
 
     connect(quit_button,SIGNAL(clicked(bool)), QApplication::instance(), SLOT(quit()));
 
     connect(solve_button,SIGNAL(clicked(bool)), this, SLOT(solve_for_me()));
+    connect(ui->actionSolveForMe,SIGNAL(triggered()),this,SLOT(solve_for_me()));
 
     connect(hint_button,SIGNAL(clicked(bool)), this, SLOT(hint()));
 
     connect(restart_button,SIGNAL(clicked(bool)), this, SLOT(restart()));
+    connect(ui->actionRestart,SIGNAL(triggered()),this,SLOT(restart()));
 
     connect(empty_button,SIGNAL(clicked(bool)), this, SLOT(empty()));
+    connect(ui->actionClear,SIGNAL(triggered()),this,SLOT(empty()));
 
     control_Widget_Layout->addWidget(title_label);
 
@@ -220,6 +233,12 @@ MainWindow::MainWindow(QWidget *parent) :
      newgame_button->setEnabled(true);
      empty_button->setEnabled(true);
 
+     ui->actionRestart->setEnabled(true);
+     ui->actionSolveForMe->setEnabled(true);
+     ui->actionCheck->setEnabled(true);
+     ui->actionNewGame->setEnabled(true);
+     ui->actionClear->setEnabled(true);
+
      Entry next_to_update = Entry(-1,-1);
      correctness_label->setText("");
 
@@ -247,6 +266,11 @@ MainWindow::MainWindow(QWidget *parent) :
      restart_button->setEnabled(false);
      hint_button->setEnabled(false);
 
+     ui->actionClear->setEnabled(false);
+     ui->actionCheck->setEnabled(false);
+     ui->actionSolveForMe->setEnabled(false);
+     ui->actionRestart->setEnabled(false);
+
      Matrix sudoku = Matrix(9);
      original_matrix = sudoku;
 
@@ -271,6 +295,12 @@ MainWindow::MainWindow(QWidget *parent) :
      solve_button->setEnabled(true);
      restart_button->setEnabled(true);
      hint_button->setEnabled(true);
+
+
+     ui->actionClear->setEnabled(true);
+     ui->actionCheck->setEnabled(true);
+     ui->actionSolveForMe->setEnabled(true);
+     ui->actionRestart->setEnabled(true);
 
      correctness_label->setText("");
      time.start();
