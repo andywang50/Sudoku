@@ -2,11 +2,12 @@ UCLA Winter 2017
 PIC 10C Project
 Author: Guoan Wang
 
-**IMPORTANT: Using RELEASE mode to run the program is STRONGLY RECOMMENDED. Since using backtracking to generate a sudoku game takes time. (NP-Complete.)
+**IMPORTANT: Using RELEASE mode to run the program is STRONGLY RECOMMENDED. Since using backtracking to generate a sudoku game takes time. (NP-Complete.)**
 If you use DEBUG mode instead, it might take (more than) 5 seconds or more to generate a new sudoku problem. 
-**
+
 
 How to use: 
+
 	1. Download the how zip, or you can use git clone. 
 	2. Use Qt creator to open the "PIC10CProject/PIC10CProject.pro".
 	3. Run using RELEASE MODE.
@@ -26,7 +27,9 @@ The sudoku part is in the root directory. Needed files are:
 	7. (This readme file.)
 	8. (The PIC10CProject folder, which is contains the QT part, explained below.)
 	
-The GUI part is in the **PIC10CProject folder** (i.e. "root_directory"/PIC10CProject). Needed files are:
+The GUI part is in the **PIC10CProject folder** (i.e. "root_directory"/PIC10CProject).
+
+Needed files are:
 
 	1. PIC10CProject/main.cpp  IMPORTANT: Use your QT to start from this main.cpp.
 	2. PIC10CProject/board.h, board.cpp
