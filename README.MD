@@ -8,7 +8,7 @@ If you use DEBUG mode instead, it might take (more than) 5 seconds or more to ge
 
 How to use: 
 
-	1. Download the how zip, or you can use git clone. 
+	1. Download the whole repository, or you can use git clone. 
 	2. Use Qt creator to open the "PIC10CProject/PIC10CProject.pro".
 	3. Run using RELEASE MODE.
 
