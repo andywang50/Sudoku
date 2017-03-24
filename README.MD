@@ -3,9 +3,13 @@ PIC 10C Project
 Author: Guoan Wang
 
 **IMPORTANT: Using RELEASE mode to run the program is STRONGLY RECOMMENDED. Since using backtracking to generate a sudoku game takes time. (NP-Complete.)
+If you use DEBUG mode instead, it might take (more than) 5 seconds or more to generate a new sudoku problem. 
 **
 
-		If you use DEBUG mode instead, it might take (more than) 5 seconds or more to generate a new sudoku problem. 
+How to use: 
+	1. Download the how zip, or you can use git clone. 
+	2. Use Qt creator to open the "PIC10CProject/PIC10CProject.pro".
+	3. Run using RELEASE MODE.
 
 Brief Introduction:
 
@@ -19,15 +23,17 @@ The sudoku part is in the root directory. Needed files are:
 	4. Stack.h
 	5. Sudoku_Generator.h, Sudoku_Generator.cpp
 	6. Sudoku_Solver.h, Sudoku_Solver.cpp
+	7. (This readme file.)
+	8. (The PIC10CProject folder, which is contains the QT part, explained below.)
 	
-The GUI part is in the PIC10CPorject folder. Needed files are:
+The GUI part is in the **PIC10CProject folder** (i.e. "root_directory"/PIC10CProject). Needed files are:
 
-	1. PIC10CPorject/main.cpp  IMPORTANT: Use your QT to start from this main.cpp.
-	2. PIC10CPorject/board.h, board.cpp
-	3. PIC10CPorject/mainwindow.h, mainwindow.cpp
-	4. PIC10CPorject/mainwindow.ui
-	5. PIC10CPorject/PIC10CProject.pro
-	6. PIC10CPorject/PIC10CProject.pro.user
+	1. PIC10CProject/main.cpp  IMPORTANT: Use your QT to start from this main.cpp.
+	2. PIC10CProject/board.h, board.cpp
+	3. PIC10CProject/mainwindow.h, mainwindow.cpp
+	4. PIC10CProject/mainwindow.ui
+	5. PIC10CProject/PIC10CProject.pro
+	6. PIC10CProject/PIC10CProject.pro.user
 
 I will introduce two parts respectively:
 
@@ -68,13 +74,13 @@ GUI part: (Qt)
 
 			Buttons: 
 
-			1. Start. Start a new game.
+			1. Start. Start a new game. 
 
 			2. Check. Check whether the solution is correct.
 
-			3. Restart. Retry this game.
+			3. Restart. Retry this game. (Same initialization state.)
 
-			4. Quit. Quit the game.
+			4. Quit. Quit the window.
 
 			5. Solve. Display the answer of this game.
 			
@@ -94,7 +100,9 @@ GUI part: (Qt)
 			2. When user modify the sudoku, automatically check whether there are any violations (e.g. two same number in the same row/ column/ square
 
 				If there are, change the background color of the incorrect grids with warning color (red or pink depending on whether this grid is a pre-defined value) for 0.5 seconds.
+				
+		4. mainwindow.ui. Contains the work done in QT Designer. Specifically, the MenuBar and a bunch of QActions. The QActions are corresponding to the buttons in mainwindow.h, except for the hint button.
 
 
 Enjoy!
-P.S. the sudoku part is coded in Visual Studio 2015. The GUI part is coded in Qt Creator 4.2.1 (Community). I am pretty sure the whole program compiles and runs well on UCLA picLab's Qt Creator (if the directory is in disk C:\).
+P.S. the sudoku part is coded in Visual Studio 2015. The GUI part is coded in Qt Creator 4.2.1 (Community). I am pretty sure the whole program compiles and runs well on UCLA picLab's Qt Creator (if the directory is in disk C:\\ ).
